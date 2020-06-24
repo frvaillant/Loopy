@@ -72,6 +72,11 @@ class Patient
      */
     private $data;
 
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $email;
+
     public function __construct()
     {
         $this->awards = new ArrayCollection();
@@ -241,6 +246,18 @@ class Patient
                 $data->setPatient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }
