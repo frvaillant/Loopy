@@ -26,7 +26,6 @@ require('bootstrap');
 
 //Slider
 require ('noUiSlider');
-require ('./patient');
 
 // Project
 require('./ChartJs/glycemia.js');
