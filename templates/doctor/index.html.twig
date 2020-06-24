@@ -1,10 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DoctorController!{% endblock %}
+{% block title %}New Patient{% endblock %}
 
 {% block body %}
-    <h1>Hello {{ doctor.doctorName }}! ✅</h1>
-    <div class="canvas">
-        <canvas id="glycemia"></canvas>
+
+    <div class="container-fluid font-oswald ">
+        <div class="row">
+            <div class="col-9 mt-5 text-center">
+                <h1>Ajouter un nouveau patient au Programme Loopy</h1>
+                {% for category, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ category }} text-center container mt-5">
+                            {{ message }}
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                <div class="mt-5 text-center">
+                    {{ include('/doctor/patient/_form.html.twig') }}
+                </div>
+            </div>
+            <div class="col-3">
+                {% include '/doctor/_sidenav.html.twig' %}
+            </div>
+        </div>
     </div>
 {% endblock %}
