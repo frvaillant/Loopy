@@ -119,6 +119,14 @@ class Patient
         return $this;
     }
 
+    public function getAge($date) {
+            $age = date('Y') - $date;
+            if (date('md') < date('md', strtotime($date))) {
+                return $age - 1;
+            }
+            return $age;
+    }
+
     public function getWeight(): ?int
     {
         return $this->weight;
