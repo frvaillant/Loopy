@@ -2,17 +2,16 @@
     <thead>
     <tr>
         <th scope="col"></th>
-        <th scope="col">Prénom</th>
-        <th scope="col">Nom</th>
+        <th scope="col">Prénom  Nom</th>
     </tr>
     </thead>
     <tbody>
     {% for patient in patients %}
-        <tr id="{{ patient.id }}">
-            <th scope="row"><i class="fas fa-angle-right"></i></th>
-            <td>{{patient.firstName}}</td>
-            <td>{{ patient.surname |upper}}</td>
-        </tr>
+            <tr id="{{ patient.id }}">
+                <th scope="row"><i class="fas fa-angle-right"></i></th>
+                <td><a href="{{ path('doctor_patient', {'id': patient.id}) }}" class="text-dark text-decoration-none">{{patient.firstName ~ ' ' ~ patient.surname |upper}}</a></td>
+            </tr>
+        </a>
     {% endfor %}
     </tbody>
 </table>

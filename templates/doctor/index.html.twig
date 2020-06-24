@@ -3,10 +3,13 @@
 {% block title %}Hello DoctorController!{% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
+    <div class="container-fluid font-oswald ">
         <div class="row">
-            <div class="col-9">
-                //to implant patient data
+            <div class="col-9 mt-5 text-center">
+                <h1>Ajouter un nouveau patient au Programme Loopy</h1>
+                <div class="mt-5 text-center">
+                    {{ include('/doctor/patient/_form.html.twig') }}
+                </div>
             </div>
             <div class="col-3">
                 {% include '/doctor/_sidenav.html.twig' %}

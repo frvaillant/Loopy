@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patient{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-9">
+                <input type="hidden" data-id="{{ choosenPatient.id }}">
+                hello {{ choosenPatient.firstName }}
+            </div>
+            <div class="col-3">
+                {% include '/doctor/_sidenav.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
