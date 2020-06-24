@@ -5,26 +5,12 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            <table class="table table-striped col-3 offset-9">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Prénom</th>
-                        <th scope="col">Nom</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                {% for patient in patients %}
-                <tr>
-                    <th scope="row"><i class="fas fa-angle-right"></i></th>
-                    <td>{{patient.firstName}}</td>
-                    <td>{{ patient.surname }}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+            <div class="col-9">
+                //to implant patient data
+            </div>
+            <div class="col-3">
+                {% include '/doctor/_sidenav.html.twig' %}
+            </div>
         </div>
     </div>
-
 {% endblock %}
