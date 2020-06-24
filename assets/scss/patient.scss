@@ -1,0 +1,83 @@
+svg {
+  #Calque_2 {
+    position:relative;
+  }
+}
+
+
+#glycemy-value {
+  position:absolute;
+  z-index:99999;
+  text-align:center;
+  line-height: 100%;
+  vertical-align: middle;
+  padding-top:25px;
+  font-size:2.5rem;
+  font-family: $neucha;
+}
+#Calque_3 {
+  z-index:999999;
+}
+#carouselExampleInterval {
+  height:100vh;
+  min-height:100vh;
+
+  .semi {
+    display:block;
+    width:100vw;
+    height:50vh;
+    text-align: center;
+    #send-button {
+      img {
+        width:100%;
+        height:auto;
+        box-shadow: 10px 10px 10px #000;
+      }
+    }
+  }
+  #loopy-1 {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    svg {
+      max-height:100vh;
+      width: auto;
+      float:right;
+    }
+  }
+  .loopyblue {
+    background: $loopy-blue;
+  }
+  #slider {
+    z-index:999999;
+    position:absolute;
+    top:10vh;
+    left:10vh;
+    height: 80vh;
+    width:30px;
+    border-radius:200px;
+    border:5px solid #fff;
+
+    .noUi-handle {
+      margin-left:-8vw;
+      border-radius : 0 50% 50% 0;
+    }
+    .noUi-base {
+      border-radius:200px;
+    }
+    .noUi-connects {
+      border-radius:200px;
+      background:linear-gradient(to bottom, #C2000B, #FF8000, #F2F91C, #80C41C, #579BCC);
+    }
+  }
+  .carousel-inner {
+    min-height: 100vh;
+    height: 100vh;
+    .carousel-item {
+      min-height: 100vh;
+      height: 100vh;
+    }
+  }
+}
