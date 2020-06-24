@@ -1,0 +1,12 @@
+#carouselExampleInterval {
+  height:100vh;
+  min-height:100vh;
+  .carousel-inner {
+    min-height: 100vh;
+    height: 100vh;
+    .carousel-item {
+      min-height: 100vh;
+      height: 100vh;
+    }
+  }
+}
