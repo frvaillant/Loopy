@@ -56,7 +56,7 @@ class DoctorController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Les données de ' . $patient->getFirstName() . 'ont été mises à jour');
+            $this->addFlash('success', 'Les données de ' . $patient->getFirstName() . ' ont été mises à jour');
 
             return $this->redirectToRoute('doctor_patient', ['id'=>$patient->getId()]);
         }
