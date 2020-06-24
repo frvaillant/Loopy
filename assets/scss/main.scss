@@ -1,7 +1,9 @@
-.font-neucha {
-    font-family: $neucha;
-}
+.font {
+    &-neucha {
+        font-family: $neucha;
+    }
 
-.font-oswald {
-    font-family: $oswald;
+    &-oswald {
+        font-family: $oswald;
+    }
 }
