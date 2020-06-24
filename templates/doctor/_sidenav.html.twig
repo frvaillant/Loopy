@@ -3,6 +3,7 @@
     <tr>
         <th scope="col"></th>
         <th scope="col">Prénom  Nom</th>
+        <th scope="col"> <a class="navbar-brand" href="{{ path('doctor') }}"><i class="fas fa-user-plus text-dark"></i></a></th>
     </tr>
     </thead>
     <tbody>
@@ -11,7 +12,7 @@
                 <th scope="row"><i class="fas fa-angle-right"></i></th>
                 <td><a href="{{ path('doctor_patient', {'id': patient.id}) }}" class="text-dark text-decoration-none">{{patient.firstName ~ ' ' ~ patient.surname |upper}}</a></td>
             </tr>
-        </a>
+
     {% endfor %}
     </tbody>
 </table>
