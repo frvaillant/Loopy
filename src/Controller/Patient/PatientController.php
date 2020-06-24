@@ -2,6 +2,7 @@
 
 namespace App\Controller\Patient;
 
+use App\Entity\Patient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
