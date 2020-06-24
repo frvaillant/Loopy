@@ -3,5 +3,8 @@
 {% block title %}Hello DoctorController!{% endblock %}
 
 {% block body %}
-    <h1>Hello ! ✅</h1>
+    <h1>Hello {{ doctor.doctorName }}! ✅</h1>
+    <div class="canvas">
+        <canvas id="glycemia"></canvas>
+    </div>
 {% endblock %}

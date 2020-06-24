@@ -14,11 +14,11 @@ class PatientFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr_FR');
-        $day   = rand(1, 29);
-        $month = rand(1, 12);
-        $year  = rand(2008, 2014);
 
         for ($i = 0; $i <= 30; $i++) {
+            $day   = rand(1, 29);
+            $month = rand(1, 12);
+            $year  = rand(2008, 2014);
             $patient = new Patient();
             $patient->setFirstName($faker->firstName);
             $patient->setSurname($faker->lastName);
