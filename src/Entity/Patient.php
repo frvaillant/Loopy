@@ -72,10 +72,16 @@ class Patient
      */
     private $data;
 
+    /**
+     * @ORM\OneToMany(targetEntity=OverValue::class, mappedBy="patient", orphanRemoval=true)
+     */
+    private $overValues;
+
     public function __construct()
     {
         $this->awards = new ArrayCollection();
         $this->data = new ArrayCollection();
+        $this->overValues = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -247,6 +253,37 @@ class Patient
             // set the owning side to null (unless already changed)
             if ($data->getPatient() === $this) {
                 $data->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OverValue[]
+     */
+    public function getOverValues(): Collection
+    {
+        return $this->overValues;
+    }
+
+    public function addOverValue(OverValue $overValue): self
+    {
+        if (!$this->overValues->contains($overValue)) {
+            $this->overValues[] = $overValue;
+            $overValue->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOverValue(OverValue $overValue): self
+    {
+        if ($this->overValues->contains($overValue)) {
+            $this->overValues->removeElement($overValue);
+            // set the owning side to null (unless already changed)
+            if ($overValue->getPatient() === $this) {
+                $overValue->setPatient(null);
             }
         }
 

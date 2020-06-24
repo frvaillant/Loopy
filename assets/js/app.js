@@ -14,6 +14,9 @@ import Chart from 'chart.js';
 // SCSS Compiler
 import '../scss/app.scss';
 
+// Ajax
+import './ajaxValue'
+
 // jQuery
 const $ = require('jquery');
 
