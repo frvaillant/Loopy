@@ -76,7 +76,7 @@ class Patient
      * @ORM\Column(type="string", length=150)
      */
     private $email;
-  
+
     /**
      * @ORM\OneToMany(targetEntity=OverValue::class, mappedBy="patient", orphanRemoval=true)
      */
@@ -269,9 +269,10 @@ class Patient
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(string $email)
     {
         $this->email = $email;
+    }
 
     /**
      * @return Collection|OverValue[]

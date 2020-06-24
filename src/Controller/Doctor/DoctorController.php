@@ -71,8 +71,9 @@ class DoctorController extends AbstractController
         return $this->render('doctor/onepatient.html.twig', [
             'choosenPatient'=> $patient,
             'patients'=> $patientRepository->findAll(),
-            'form'=> $form->createView()])
-     }
+            'form'=> $form->createView()]);
+        }
+
      /**
      * @Route("/doctor/fetchData/{id}", name="fetch_data")
      * @param Patient $patient
