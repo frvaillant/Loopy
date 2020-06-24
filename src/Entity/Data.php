@@ -88,12 +88,16 @@ class Data
     }
 
     /**
-     * @ORM\PrePersist()
+     * @param DateTime $dateTime
      * @return $this
      */
-    public function setAddedAt(): self
+    public function setAddedAt(DateTime $dateTime = null): self
     {
         $this->addedAt = new DateTime();
+
+        if ($dateTime) {
+            $this->addedAt = $dateTime;
+        }
 
         return $this;
     }
