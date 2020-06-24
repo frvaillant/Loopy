@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+    <div class="mt-4">
+        {{ form_label(form.surname) }}
+        {{ form_widget(form.surname) }}
+
+    {{ form_label(form.firstName) }}
+    {{ form_widget(form.firstName) }}
+</div>
+<div class="mt-4">
+    {{ form_label(form.birthday) }}
+    {{ form_widget(form.birthday) }}
+</div>
+<div class="mt-4">
+    {{ form_label(form.weight) }}
+    {{ form_widget(form.weight) }}
+</div>
+<div class="mt-4">
+    {{ form_label(form.limitUp) }}
+    {{ form_widget(form.limitUp) }}
+
+    {{ form_label(form.limitDown) }}
+    {{ form_widget(form.limitDown) }}
+</div>
+
+<button class="btn btn-outline-primary mt-5">{{ button_label|default('Ajouter !') }}</button>
+
+{{ form_end(form) }}

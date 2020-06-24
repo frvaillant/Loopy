@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Data;
+use App\Entity\OverValue;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use DateTime;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -26,7 +27,13 @@ class DataFixtures extends Fixture implements DependentFixtureInterface
                     $time = new DateTime('2020-06-' . $j . ' ' . self::HOURS[$k] . ':00:00');
                     $data->setPatient($this->getReference('patient_' . $i));
                     $data->setDataCategory($this->getReference('category'));
-                    $data->setValue(rand(80, 120));
+                    $data->setValue(rand(60, 201));
+                    if ($data->getValue() < 60 or $data->getValue() > 200) {
+                        $over = new OverValue();
+                        $over->setPatient($data->getPatient());
+                        $over->setHasValue(true);
+                        $manager->persist($over);
+                    }
                     $data->setAddedAt($time);
                     $manager->persist($data);
                 }
