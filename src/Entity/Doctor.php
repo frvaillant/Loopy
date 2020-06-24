@@ -75,6 +75,11 @@ class Doctor
         return $this;
     }
 
+    public function getDoctorName(): string
+    {
+        return 'Dr ' . $this->getSurname();
+    }
+
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
