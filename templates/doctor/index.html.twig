@@ -3,24 +3,28 @@
 {% block title %}Hello DoctorController!{% endblock %}
 
 {% block body %}
-    <h1></h1>
-blabla
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for patient in patients %}
-        <tr>
-            <th scope="row"><i class="fas fa-angle-right"></i></th>
-            <td>{{patient.firstName}}</td>
-            <td>{{ patient.surname }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-striped col-3 offset-9">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Nom</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                {% for patient in patients %}
+                <tr>
+                    <th scope="row"><i class="fas fa-angle-right"></i></th>
+                    <td>{{patient.firstName}}</td>
+                    <td>{{ patient.surname }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 {% endblock %}
