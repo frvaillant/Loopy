@@ -8,8 +8,14 @@
 // Font Awesome
 import '@fortawesome/fontawesome-free/js/all';
 
+// ChartJs
+import Chart from 'chart.js';
+
 // SCSS Compiler
 import '../scss/app.scss';
+
+// Ajax
+import './ajaxValue'
 
 // jQuery
 const $ = require('jquery');
@@ -17,6 +23,11 @@ const $ = require('jquery');
 // Bootstrap
 require('bootstrap');
 
+
 //Slider
 require ('noUiSlider');
 require ('./patient');
+
+// Project
+require('./ChartJs/glycemia.js');
+

@@ -77,7 +77,7 @@ class Doctor
 
     public function getDoctorName(): string
     {
-        return 'Dr ' . $this->getSurname();
+        return ucwords('Doc. ' . $this->getFirstName()[0] . '. ' . $this->getSurname());
     }
 
     public function getCreatedAt(): ?\DateTimeInterface

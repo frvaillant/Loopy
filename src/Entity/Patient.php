@@ -72,10 +72,21 @@ class Patient
      */
     private $data;
 
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $email;
+
+    /**
+     * @ORM\OneToMany(targetEntity=OverValue::class, mappedBy="patient", orphanRemoval=true)
+     */
+    private $overValues;
+
     public function __construct()
     {
         $this->awards = new ArrayCollection();
         $this->data = new ArrayCollection();
+        $this->overValues = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,6 +128,14 @@ class Patient
         $this->birthday = $birthday;
 
         return $this;
+    }
+
+    public function getAge($date) {
+            $age = date('Y') - $date;
+            if (date('md') < date('md', strtotime($date))) {
+                return $age - 1;
+            }
+            return $age;
     }
 
     public function getWeight(): ?int
@@ -239,6 +258,47 @@ class Patient
             // set the owning side to null (unless already changed)
             if ($data->getPatient() === $this) {
                 $data->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return Collection|OverValue[]
+     */
+    public function getOverValues(): Collection
+    {
+        return $this->overValues;
+    }
+
+    public function addOverValue(OverValue $overValue): self
+    {
+        if (!$this->overValues->contains($overValue)) {
+            $this->overValues[] = $overValue;
+            $overValue->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOverValue(OverValue $overValue): self
+    {
+        if ($this->overValues->contains($overValue)) {
+            $this->overValues->removeElement($overValue);
+            // set the owning side to null (unless already changed)
+            if ($overValue->getPatient() === $this) {
+                $overValue->setPatient(null);
             }
         }
 
