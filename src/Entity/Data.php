@@ -94,7 +94,6 @@ class Data
     public function setAddedAt(DateTime $dateTime = null): self
     {
         $this->addedAt = new DateTime();
-
         if ($dateTime) {
             $this->addedAt = $dateTime;
         }

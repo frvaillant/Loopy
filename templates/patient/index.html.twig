@@ -756,10 +756,10 @@
                     </svg>
                 </div>
                 <div class="semi" id="send-button">
-                    <svg id="send-button-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="auto"
-                         height="80%" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
+                    <svg id="send-button-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="300px"
+                         height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
                         <g id="button-calque-1">
-    <path fill="#2E58A6" d="M227.995,81.262c-19.044-16.565-43.902-26.618-71.124-26.618C96.976,54.645,48.42,103.2,48.42,163.096
+    <path fill="#37657E" d="M227.995,81.262c-19.044-16.565-43.902-26.618-71.124-26.618C96.976,54.645,48.42,103.2,48.42,163.096
 		c0,27.22,10.051,52.077,26.613,71.119c19.883,22.859,49.162,37.332,81.838,37.332c59.896,0,108.451-48.555,108.451-108.451
 		C265.322,130.421,250.853,101.146,227.995,81.262z"/>
     <path fill="#A30D0D" d="M221.632,67.954c16.562,19.042,26.613,43.899,26.613,71.119c0,59.896-48.556,108.452-108.451,108.452
@@ -784,10 +784,15 @@
 		160.792,127.321 160.792,140.46 116.628,140.46 116.628,174.868 160.792,174.868 160.792,188.155 204.387,157.91 	"/>
                         </g>
 </svg>
+                    <div id="success" class="d-none">{{ include ('svg/loopy_allonge.html.twig') }}</div>
                 </div>
             </div>
             <div class="carousel-item loopyblue" data-interval="">
-                coucou
+                <div class="final">
+                    <img src="{{ asset('build/images/eqmoins.svg') }}" width="100%" id="less" class="d-none">
+                    <img src="{{ asset('build/images/eqok.svg') }}" width="100%" id="ok" class="d-none">
+                    <img src="{{ asset('build/images/eqtrop.svg') }}" width="100%" id="toomuch" class="d-none">
+                </div>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">

@@ -42,7 +42,23 @@ $(document).ready(function() {
         }).mouseup(function () {
             $('#button-calque-1').css('display', 'block');
             $('#button-calque-2').css('display', 'none');
-            $('#doc-calque-3').css('display', 'block');
+
+            const value = parseInt(glycemytext.html());
+            console.log(value);
+            fetch('/patient/measure/' + value, {
+                method: "put"
+            })
+                .then(response => {
+                    return response.json()
+                }).then(data => {
+                    console.log(data)
+                   if (data.response === 201) {
+                       $('#doc-calque-3').css('display', 'block');
+                       $('#send-button-svg').addClass('d-none');
+                       $('#success').removeClass('d-none');
+                       $('#' + data.state).removeClass('d-none');
+                   }
+            });
         })
 
 

@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Data;
 use App\Entity\Patient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use \DateTime;
 
 /**
  * @method Patient|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +20,30 @@ class PatientRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Patient::class);
+    }
+
+    public function saveData($glycemy, EntityManagerInterface $em, DataCategoryRepository $categoryRepository) {
+        $patientId = 22;
+        $patient = $this->findOneById($patientId);
+        $data = new Data();
+        $category = $categoryRepository->findOneById(1);
+        $data->setPatient($patient);
+        $data->setValue($glycemy);
+        $data->setDataCategory($category);
+        $data->setAddedAt(new DateTime());
+        $em->persist($data);
+        $em->flush();
+
+        $limitUp = $patient->getLimitUp();
+        $limitDown = $patient->getLimitDown();
+        $state = 'ok';
+        if ($glycemy<$limitDown) {
+            $state = 'less';
+        }
+        if ($glycemy>$limitUp) {
+            $state = 'toomuch';
+        }
+        return ['response' => 201, 'state' => $state];
     }
 
     // /**

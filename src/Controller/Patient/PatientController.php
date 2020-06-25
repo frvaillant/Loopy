@@ -2,12 +2,18 @@
 
 namespace App\Controller\Patient;
 
+use App\Entity\Data;
 use App\Entity\OverValue;
+use App\Repository\DataCategoryRepository;
+use App\Repository\DataRepository;
+use App\Repository\PatientRepository;
 use App\Service\MailingService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use \DateTime;
 
 class PatientController extends AbstractController
 {
@@ -37,5 +43,15 @@ class PatientController extends AbstractController
             }
         }
         return new JsonResponse($result);
+    }
+
+    /**
+     * @Route("/patient/measure/{glycemy}", name="send_value", methods={"PUT"})
+     */
+    public function sendMeasure ($glycemy, PatientRepository $patientRepository,  EntityManagerInterface $em, DataCategoryRepository $categoryRepository)
+    {
+        // $patient = $this->getUser();
+        $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository);
+        return new JsonResponse($responseCode);
     }
 }
