@@ -37,9 +37,9 @@ class PatientRepository extends ServiceEntityRepository
     {
         $patientId = $this->session->get('patient');
 
-        $patient = $this->findOneById($patientId);
+        $patient = $this->find($patientId);
         $data = new Data();
-        $category = $categoryRepository->findOneById(1);
+        $category = $categoryRepository->find(1);
         $data->setPatient($patient);
         $data->setValue($glycemy);
         $data->setDataCategory($category);

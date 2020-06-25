@@ -66,20 +66,25 @@ class PatientController extends AbstractController
      * @param EntityManagerInterface $em
      * @param DataCategoryRepository $categoryRepository
      * @param OverValueRepository $overValueRepository
+     * @param BadgeManager $badgeManager
+     * @param SessionInterface $session
      * @return JsonResponse
      */
-    public function sendMeasure($glycemy, PatientRepository $patientRepository, EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository, BadgeManager $badgeManager)
+    public function sendMeasure($glycemy,
+                                PatientRepository $patientRepository,
+                                EntityManagerInterface $em,
+                                DataCategoryRepository $categoryRepository,
+                                OverValueRepository $overValueRepository,
+                                BadgeManager $badgeManager,
+                                SessionInterface $session)
     {
-        // $patient = $this->getUser();
         $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository);
+
+        $patient = $session->get('patient');
 
         $data = count($this->getDoctrine()
             ->getRepository(Data::class)
-            ->findBy(['patient' => 32]));
-
-        $patient = $this->getDoctrine()
-            ->getRepository(Patient::class)
-            ->findOneById(32);
+            ->findBy(['patient' => $patient->getId()]));
 
         $badges = $this->getDoctrine()
             ->getRepository(Badge::class)
