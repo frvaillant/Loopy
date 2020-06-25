@@ -56,6 +56,7 @@ $(document).ready(function() {
                        $('#btn-up').removeClass('rotate');
                        $('#send-button-svg').addClass('d-none');
                        $('#glycemy-value').hide();
+                       $('#ardoise').hide();
                        $('#success').removeClass('d-none');
                        $('#' + data.state).removeClass('d-none');
                        document.getElementById('slider').classList.add('d-none');

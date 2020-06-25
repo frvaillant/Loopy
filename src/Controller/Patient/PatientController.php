@@ -26,8 +26,6 @@ class PatientController extends AbstractController
      */
     public function index($id, PatientRepository $patientRepository)
     {
-        $session=new Session();
-        $session->set('patient', $id);
         $patient = $patientRepository->findOneById($id);
         return $this->render('patient/index.html.twig', [
                 'patient' => $patient
