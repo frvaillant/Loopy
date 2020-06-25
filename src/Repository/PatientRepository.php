@@ -36,10 +36,9 @@ class PatientRepository extends ServiceEntityRepository
                              OverValueRepository $overValueRepository)
     {
         $patientId = $this->session->get('patient');
-
         $patient = $this->findOneById($patientId);
         $data = new Data();
-        $category = $categoryRepository->findOneById(1);
+        $category = $categoryRepository->findOneById([]);
         $data->setPatient($patient);
         $data->setValue($glycemy);
         $data->setDataCategory($category);

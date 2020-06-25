@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PatientRepository;
 use App\Service\DateManager;
+use App\Service\NumberManager;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -82,6 +83,36 @@ class Patient
      * @ORM\OneToMany(targetEntity=OverValue::class, mappedBy="patient", orphanRemoval=true)
      */
     private $overValues;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $dadSurname;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $dadFirstName;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $dadPhoneNumber;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $momSurname;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $momFirstName;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $momPhoneNumber;
 
     public function __construct()
     {
@@ -268,9 +299,11 @@ class Patient
         return $this->email;
     }
 
-    public function setEmail(string $email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -300,6 +333,98 @@ class Patient
                 $overValue->setPatient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDadSurname(): ?string
+    {
+        return $this->dadSurname;
+    }
+
+    public function setDadSurname(?string $dadSurname): self
+    {
+        $this->dadSurname = $dadSurname;
+
+        return $this;
+    }
+
+    public function getDadFirstName(): ?string
+    {
+        return $this->dadFirstName;
+    }
+
+    public function setDadFirstName(?string $dadFirstName): self
+    {
+        $this->dadFirstName = $dadFirstName;
+
+        return $this;
+    }
+
+    public function getDadFullName(): string
+    {
+        return 'M. ' . $this->dadFirstName . ' ' . strtoupper($this->dadSurname);
+    }
+
+    public function getDadPhoneNumber(): ?string
+    {
+        return $this->dadPhoneNumber;
+    }
+
+    public function getDadFormattedPhoneNumber(): string
+    {
+        return NumberManager::addPointToPhoneNumber($this->getDadPhoneNumber());
+    }
+
+    public function setDadPhoneNumber(?string $dadPhoneNumber): self
+    {
+        $this->dadPhoneNumber = $dadPhoneNumber;
+
+        return $this;
+    }
+
+    public function getMomSurname(): ?string
+    {
+        return $this->momSurname;
+    }
+
+    public function setMomSurname(?string $momSurname): self
+    {
+        $this->momSurname = $momSurname;
+
+        return $this;
+    }
+
+    public function getMomFirstName(): ?string
+    {
+        return $this->momFirstName;
+    }
+
+    public function setMomFirstName(?string $momFirstName): self
+    {
+        $this->momFirstName = $momFirstName;
+
+        return $this;
+    }
+
+    public function getMomFullName(): string
+    {
+        return 'Mme. ' . $this->momFirstName . ' ' . strtoupper($this->momSurname);
+    }
+
+    public function getMomPhoneNumber(): ?string
+    {
+        return $this->momPhoneNumber;
+    }
+
+    public function getMomFormattedPhoneNumber(): string
+    {
+        return NumberManager::addPointToPhoneNumber($this->getMomPhoneNumber());
+    }
+
+    public function setMomPhoneNumber(?string $momPhoneNumber): self
+    {
+        $this->momPhoneNumber = $momPhoneNumber;
 
         return $this;
     }
