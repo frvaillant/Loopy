@@ -44,7 +44,7 @@ class PatientRepository extends ServiceEntityRepository
         if ($glycemy<$limitDown) {
             $state = 'less';
             $overValueRepository->registerOverValue($patient, $em);
-            $this->mailingService->emailAlert($patient);
+            $this->mailingService->emailAlert($patient, 'down');
         }
         if ($glycemy>$limitUp) {
             $state = 'toomuch';

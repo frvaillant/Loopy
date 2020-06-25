@@ -56,4 +56,15 @@ class PatientController extends AbstractController
 
         return new JsonResponse($responseCode);
     }
+
+    /**
+     * @Route("/parent/index/", name="send_value")
+     */
+    public function parentTable()
+    {
+        $patient = $this->getDoctrine()->getRepository(Patient::class)->find(94);
+        return $this->render('patient/parent.html.twig', [
+            'patient' => $patient,
+        ]);
+    }
 }

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ patient.firstName| capitalize ~ ' ' ~ patient.surname |upper }}{% endblock %}
+
+{% block body %}
+    <div class="container-fluid bg-light-grey">
+        <input type="hidden" id="PatientId" data-id="{{ patient.id }}">
+        <div class="row">
+            {% for category, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ category }} text-center container mt-5">
+                        {{ message }}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="row mt-5">
+            <div class="col-6 d-flex flex-column">
+                <div class="m-auto">
+                    <h3><i class="fas fa-user-injured mr-3"></i> {{ patient.firstName| capitalize ~ ' ' ~ patient.surname | upper }}</h3>
+                    <h4 class="font-weight-lighter"><i class="fas fa-birthday-cake mr-3"></i> {{ patient.birthday | date ('d/m/Y') }} - {{ patient.age }} ans</h4>
+                    <h4 class="font-weight-lighter"><i class="fas fa-weight mr-3"></i>Poids (kg) {{ patient.weight }}</h4>
+                </div>
+            </div>
+            <div class="col-6 d-flex flex-column">
+                <div class="m-auto">
+                    <h4 class="font-weight-lighter"><i class="fas fa-virus mr-3"></i> Diabète Insulino Dépendant</h4>
+                    <h4 class="font-weight-lighter"><i class="fas fa-stethoscope mr-3"></i> Doc T.Olib</h4>
+                    <h4 class="font-weight-lighter"><i class="fas fa-phone-square mr-3 "></i> 06.48.32.72.64</h4>
+                </div>
+            </div>
+        </div>
+        <hr class="parents-line">
+        <div class="canvas pb-5">
+            <canvas id="glycemia"></canvas>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('glycemia') }}
+{% endblock %}
