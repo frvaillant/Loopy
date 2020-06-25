@@ -22,7 +22,7 @@ class DataFixtures extends Fixture implements DependentFixtureInterface
     {
         for ($i = 0; $i <= 30; $i++) {
             $patient = $manager->find('App:Patient', $this->getReference('patient_' . $i));
-            for ($j = 1; $j <= 30; $j++) {
+            for ($j = 1; $j <= 24; $j++) {
                 for ($k = 0; $k < 4; $k++) {
                     $data = new Data();
                     $time = new DateTime('2020-06-' . $j . ' ' . self::HOURS[$k] . ':00:00');

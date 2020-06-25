@@ -23,13 +23,14 @@ use \DateTime;
 class PatientController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/{id}", name="home")
      * @return Response
      */
-    public function index()
+    public function index($id, PatientRepository $patientRepository)
     {
+        $patient = $patientRepository->findOneById($id);
         return $this->render('patient/index.html.twig', [
-
+                'patient' => $patient
         ]);
     }
 
