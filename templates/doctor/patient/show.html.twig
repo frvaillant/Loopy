@@ -19,9 +19,9 @@
 
                 <div class="d-flex justify-content-around">
                     <div class="d-flex flex-column justify-content-around">
-                        <h3><i class="fas fa-user-injured mr-3"></i> {{ choosenPatient.firstName| capitalize ~ ' ' ~ choosenPatient.surname | upper }}</h3>
-                        <h4 class="font-weight-lighter"><i class="fas fa-birthday-cake mr-3"></i> {{ choosenPatient.birthday | date ('d/m/Y') }} - {{ choosenPatient.age }} ans</h4>
-                        <h4 class="font-weight-lighter"><i class="fas fa-virus mr-3"></i> Diabète Insulino Dépendant</h4>
+                        <h3 class="d-flex align-items-center"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-user-injured "></i></span> {{ choosenPatient.firstName| capitalize ~ ' ' ~ choosenPatient.surname | upper }}</h3>
+                        <h4 class="font-weight-lighter d-flex align-items-center"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-birthday-cake pt-1"></i></span>{{ choosenPatient.birthday | date ('d/m/Y') }} - {{ choosenPatient.age }} ans</h4>
+                        <h4 class="font-weight-lighter d-flex align-items-center"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-virus pt-1"></i></span> Diabète Insulino Dépendant</h4>
                     </div>
                     {{ include('/doctor/patient/_edit_limit_form.html.twig') }}
                 </div>
