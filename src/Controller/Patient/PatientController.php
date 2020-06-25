@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
 use Symfony\Component\Validator\Constraints\Json;
@@ -26,20 +27,22 @@ class PatientController extends AbstractController
 {
     /**
      * @Route("/{id}", name="home")
+     * @param $id
+     * @param PatientRepository $patientRepository
+     * @param SessionInterface $session
      * @return Response
      */
-    public function index($id, PatientRepository $patientRepository)
+    public function index($id, PatientRepository $patientRepository, SessionInterface $session)
     {
-        $session=new Session();
-        $session->set('patient', $id);
         $patient = $patientRepository->findOneById($id);
+        $session->set('patient', $patient);
         return $this->render('patient/index.html.twig', [
                 'patient' => $patient
         ]);
     }
 
     /**
-     * @Route("/check", name="checkValue")
+     * @Route("/overvalue/check", name="checkValue")
      */
     public function check()
     {
