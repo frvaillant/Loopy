@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         yAxes: [{
                             scaleLabel : {
                                 display: true,
-                                labelString: 'Taux de glycémie'
+                                labelString: 'Glycémie'
                             },
                             ticks: {
                                 suggestedMin: 50,

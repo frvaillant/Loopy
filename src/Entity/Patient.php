@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PatientRepository;
+use App\Service\DateManager;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -118,7 +119,7 @@ class Patient
         return $this;
     }
 
-    public function getBirthday(): ?\DateTimeInterface
+    public function getBirthday(): ?DateTime
     {
         return $this->birthday;
     }
@@ -130,12 +131,10 @@ class Patient
         return $this;
     }
 
-    public function getAge($date) {
-            $age = date('Y') - $date;
-            if (date('md') < date('md', strtotime($date))) {
-                return $age - 1;
-            }
-            return $age;
+    public function getAge(): int
+    {
+        $interval = DateManager::dateIntervalBetweenNowAnd($this->getBirthday());
+        return $interval->y;
     }
 
     public function getWeight(): ?int
