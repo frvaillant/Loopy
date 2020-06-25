@@ -7,6 +7,7 @@ use App\Entity\Badge;
 use App\Entity\Data;
 use App\Entity\OverValue;
 use App\Entity\Patient;
+use App\Form\ContactType;
 use App\Repository\DataCategoryRepository;
 use App\Repository\DataRepository;
 use App\Repository\OverValueRepository;
@@ -14,8 +15,10 @@ use App\Repository\PatientRepository;
 use App\Service\BadgeManager;
 use App\Service\MailingService;
 use Doctrine\ORM\EntityManagerInterface;
+use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,44 +67,43 @@ class PatientController extends AbstractController
      * @param EntityManagerInterface $em
      * @param DataCategoryRepository $categoryRepository
      * @param OverValueRepository $overValueRepository
-     * @param BadgeManager $badgeManager
-     * @param SessionInterface $session
      * @return JsonResponse
      */
     public function sendMeasure($glycemy,
                                 PatientRepository $patientRepository,
                                 EntityManagerInterface $em,
                                 DataCategoryRepository $categoryRepository,
-                                OverValueRepository $overValueRepository,
-                                BadgeManager $badgeManager,
-                                SessionInterface $session)
+                                OverValueRepository $overValueRepository)
     {
-        $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository, $session);
 
-        $patient = $session->get('patient');
+        try {
+            $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository);
+        } catch (\Exception $e) {
+            return new JsonResponse($e, 500);
+        }
 
-        $data = count($this->getDoctrine()
-            ->getRepository(Data::class)
-            ->findBy(['patient' => $patient->getId()]));
+        return new JsonResponse($responseCode);
 
-        $badges = $this->getDoctrine()
-            ->getRepository(Badge::class)
-            ->findAll();
-
-        $badge = $badgeManager->addBadge($patient, $data, $badges);
-        $response = array_merge($responseCode, $badge);
-        return new JsonResponse($response);
     }
 
     /**
      * @Route("/parent/{id}", name="parent")
      * @param Patient $patient
+     * @param Request $request
      * @return Response
      */
-    public function parentTable(Patient $patient)
+    public function parentTable(Patient $patient, Request $request)
     {
+        $form = $this->createForm(ContactType::class, $patient);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+        }
+
         return $this->render('patient/parent.html.twig', [
             'patient' => $patient,
+            'contact' => $form->createView()
         ]);
     }
 

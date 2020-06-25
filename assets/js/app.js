@@ -12,7 +12,6 @@ import '@fortawesome/fontawesome-free/js/all';
 import '../scss/app.scss';
 
 // Ajax
-import './ajaxValue';
 import './ajaxList';
 
 // jQuery

@@ -7,6 +7,8 @@
     <div class="container-fluid font-oswald ">
         <div class="row">
             <div class="col-9 pt-5 text-center bg-light-grey">
+                <img src="{{ asset('/build/images/logo2.svg') }}" class="mb-5">
+
                 <h1>Ajouter un nouveau patient au Programme Loopy</h1>
                 {% for category, messages in app.flashes %}
                     {% for message in messages %}
@@ -16,7 +18,7 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
-                <div class="mt-5 text-center">
+                <div class="col-6 offset-3 mt-5 text-center bck-grey p-4">
                     {{ include('/doctor/patient/_new_form.html.twig') }}
                 </div>
             </div>

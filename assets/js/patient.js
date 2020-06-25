@@ -50,8 +50,12 @@ $(document).ready(function() {
                 .then(response => {
                     return response.json()
                 }).then(data => {
-                    console.log(data)
                    if (data.response === 201) {
+                       fetch('/check/badge')
+                           .then(response => response.json())
+                           .then(data => {
+                               console.log(data, 'badge')
+                           })
                        $('#doc-calque-3').css('display', 'block');
                        $('#btn-up').removeClass('rotate');
                        $('#send-button-svg').addClass('d-none');

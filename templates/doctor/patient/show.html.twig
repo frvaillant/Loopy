@@ -43,18 +43,18 @@
                     <div class="collapse" id="collapseExample">
                         {% if choosenPatient.dadSurname %}
                         <div class="d-flex justify-content-around container">
-                            <div class="card parent-card" style="width: 18rem;">
+                            <div class="card parent-card bck-grey" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h6 class="card-subtitle mb-2 text-muted">Père</h6>
+                                    <h2 class="card-subtitle mb-2 text-muted">Père</h2>
                                     <h5 class="card-title">{{ choosenPatient.dadFullName }}</h5>
                                     <p class="card-text">Téléphone : {{ choosenPatient.dadFormattedPhoneNumber }}</p>
                                 </div>
                             </div>
                             {% endif %}
                             {% if choosenPatient.momSurname %}
-                                <div class="card parent-card" style="width: 18rem;">
+                                <div class="card parent-card bck-grey" style="width: 18rem;">
                                     <div class="card-body">
-                                        <h6 class="card-subtitle mb-2 text-muted">Mère</h6>
+                                        <h3 class="card-subtitle mb-2 text-muted">Mère</h3>
                                         <h5 class="card-title">{{ choosenPatient.momFullName }}</h5>
                                         <p class="card-text">Téléphone : {{ choosenPatient.momFormattedPhoneNumber }}</p>
                                     </div>
