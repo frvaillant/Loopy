@@ -5,7 +5,6 @@
         div {
             width: 100%;
             height: 100%;
-            background-color: #579BCC;
             text-align: center;
         }
         p {
@@ -19,9 +18,8 @@
         }
     </style>
     <div>
+        <img src="{{ email.image('@images/loopy2.svg') }}" alt="Loopy">
         <h2>Le {{ patient.doctor.surname }} {{ patient.doctor.firstname }}</h2>
-        <p>Invite votre enfant à prendre soin de Loopy</p>
-        <img src="{{ email.image('@images/loopy-trou.svg') }}" alt="Loopy">
-        <p>Si Loopy est bien traité peut qu'il se mettra à dancer ...</p>
+        <p>Cliquer ici pour vous connecter</p>
     </div>
 {% endapply %}
