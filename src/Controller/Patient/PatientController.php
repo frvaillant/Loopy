@@ -4,6 +4,7 @@ namespace App\Controller\Patient;
 
 use App\Entity\Data;
 use App\Entity\OverValue;
+use App\Entity\Patient;
 use App\Repository\DataCategoryRepository;
 use App\Repository\DataRepository;
 use App\Repository\PatientRepository;
@@ -19,10 +20,9 @@ class PatientController extends AbstractController
 {
     /**
      * @Route("/", name="home")
-     * @param MailingService $mailingService
      * @return Response
      */
-    public function index(MailingService $mailingService)
+    public function index()
     {
         return $this->render('patient/index.html.twig', [
 
