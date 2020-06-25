@@ -1,10 +1,13 @@
 {% apply inline_css() %}
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
         div {
             width: 100%;
             min-height: 100%;
             background-color: #579BCC;
             text-align: center;
+            font-family: 'Oswald', sans-serif;
         }
         h1 {
             color: white;
@@ -21,12 +24,12 @@
     </style>
     <div>
         <br>
-        <h2>Loopy vous informe qu'il ne se sent pas très bien</h2>
+            <h2>Loopy vous informe qu'il ne se sent pas très bien</h2>
         <br>
-        <img src="{{ email.image('@images/loopy2.svg') }}" alt="Loopy">
+            <img src="{{ email.image('@images/loopy2.svg') }}" alt="Loopy">
         <br>
-        <p>Le taux de {{ patient.firstname }} est au dessus de la limite.</p>
-        <p>Si le taux ne se stabilise pas veuillez prendre rendez vous avec {{ patient.doctor.surname }}</p>
+            <p>Le taux de {{ patient.firstname }} est {{ context == 'up' ? 'au dessus' : 'en dessous' }} de la limite.</p>
+            <p>Si le taux ne se stabilise pas veuillez prendre rendez vous avec {{ patient.doctor.surname }}</p>
         <br>
         <br>
     </div>

@@ -5,5 +5,5 @@ twig:
     exception_controller: null
     paths:
         # point this wherever your images live
-        '%kernel.project_dir%/assets/images/mail': images
+        '%kernel.project_dir%/assets/images': images
 
