@@ -1,11 +1,11 @@
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th scope="col"></th>
-        <th scope="col">Prénom  Nom</th>
-        <th scope="col"> <a class="navbar-brand" href="{{ path('doctor') }}"><i class="fas fa-user-plus text-dark"></i></a></th>
-    </tr>
-    </thead>
+<div class="w-100 position-fixed bg-dark-grey pl-3 en-tete">
+    <div class="d-flex align-items-center mt-3">
+        <a class="navbar-brand text-white" href="{{ path('doctor') }}"><i class="fas fa-user-plus"></i></a>
+        <h5 class="ml-4 text-white">Prénom  Nom</h5>
+    </div>
+
+</div>
+<table class="table table-hover margin-table">
     <tbody>
     {% for patient in patients %}
             <tr id="{{ patient.id }}">
