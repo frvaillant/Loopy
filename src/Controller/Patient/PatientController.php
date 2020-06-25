@@ -73,11 +73,12 @@ class PatientController extends AbstractController
                                 PatientRepository $patientRepository,
                                 EntityManagerInterface $em,
                                 DataCategoryRepository $categoryRepository,
-                                OverValueRepository $overValueRepository)
+                                OverValueRepository $overValueRepository,
+                                SessionInterface $session)
     {
 
         try {
-            $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository);
+            $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository, $session);
         } catch (\Exception $e) {
             return new JsonResponse($e, 500);
         }
