@@ -22,7 +22,7 @@ class PatientRepository extends ServiceEntityRepository
 {
     private MailingService $mailingService;
 
-    private  SessionInterface $session;
+    private SessionInterface $session;
 
     public function __construct(ManagerRegistry $registry, MailingService $mailingService, SessionInterface $session)
     {
@@ -31,10 +31,11 @@ class PatientRepository extends ServiceEntityRepository
         $this->session = $session;
     }
 
-    public function saveData($glycemy, EntityManagerInterface $em,
-                             DataCategoryRepository $categoryRepository,
-                             OverValueRepository $overValueRepository)
-    {
+    public function saveData(
+        $glycemy, EntityManagerInterface $em,
+        DataCategoryRepository $categoryRepository,
+        OverValueRepository $overValueRepository
+    ) {
         $patientId = $this->session->get('patient');
         $patient = $this->findOneById($patientId);
         $data = new Data();
@@ -49,12 +50,12 @@ class PatientRepository extends ServiceEntityRepository
         $limitUp = $patient->getLimitUp();
         $limitDown = $patient->getLimitDown();
         $state = 'ok';
-        if ($glycemy<$limitDown) {
+        if ($glycemy < $limitDown) {
             $state = 'less';
             $overValueRepository->registerOverValue($patient, $em);
             $this->mailingService->emailAlert($patient, 'down');
         }
-        if ($glycemy>$limitUp) {
+        if ($glycemy > $limitUp) {
             $state = 'toomuch';
             $overValueRepository->registerOverValue($patient, $em);
             $this->mailingService->emailAlert($patient);
