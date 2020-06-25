@@ -67,6 +67,7 @@ class PatientController extends AbstractController
      * @param EntityManagerInterface $em
      * @param DataCategoryRepository $categoryRepository
      * @param OverValueRepository $overValueRepository
+     * @param SessionInterface $session
      * @return JsonResponse
      */
     public function sendMeasure($glycemy,
