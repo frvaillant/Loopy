@@ -20,7 +20,6 @@ $(document).ready(function() {
         });
         slider.noUiSlider.on('update', function (values, handle) {
             gValue.innerHTML = parseInt(values[0])
-            console.log(values[0]);
         });
 
     const $glycemiTarget = $('#ardoise');
@@ -44,14 +43,14 @@ $(document).ready(function() {
             $('#bbtn-down').css('display', 'none');
             $('#btn-up').addClass('rotate');
             const value = parseInt(glycemytext.html());
-            console.log(value);
+
             fetch('/patient/measure/' + value, {
                 method: "put"
             })
                 .then(response => {
                     return response.json()
                 }).then(data => {
-                    console.log(data)
+
                    if (data.response === 201) {
                        $('#doc-calque-3').css('display', 'block');
                        $('#btn-up').removeClass('rotate');

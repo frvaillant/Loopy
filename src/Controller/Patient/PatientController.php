@@ -17,25 +17,32 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
+use Symfony\Component\Validator\Constraints\Json;
 
 class PatientController extends AbstractController
 {
     /**
      * @Route("/{id}", name="home")
+     * @param $id
+     * @param PatientRepository $patientRepository
+     * @param SessionInterface $session
      * @return Response
      */
-    public function index($id, PatientRepository $patientRepository)
+    public function index($id, PatientRepository $patientRepository, SessionInterface $session)
     {
         $patient = $patientRepository->findOneById($id);
+        $session->set('patient', $patient);
         return $this->render('patient/index.html.twig', [
                 'patient' => $patient
         ]);
     }
 
     /**
-     * @Route("/check", name="checkValue")
+     * @Route("/overvalue/check", name="checkValue")
      */
     public function check()
     {
@@ -93,5 +100,24 @@ class PatientController extends AbstractController
         return $this->render('patient/parent.html.twig', [
             'patient' => $patient,
         ]);
+    }
+
+    /**
+     * @Route("/patient/overvalue/delete/{id}", name="delete_overvalue")
+     * @param $id
+     * @param PatientRepository $patientRepository
+     * @param OverValueRepository $overValueRepository
+     * @return JsonResponse
+     */
+    public function deleteOverValue($id, PatientRepository $patientRepository, OverValueRepository $overValueRepository): JsonResponse
+    {
+        $patient = $patientRepository->find($id);
+        $overValue = $overValueRepository->findBy(['patient' => $patient]);
+        foreach ($overValue as $value) {
+            $this->getDoctrine()->getManager()->remove($value);
+        }
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse();
     }
 }
