@@ -20,7 +20,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
@@ -30,14 +29,13 @@ class PatientController extends AbstractController
 {
     /**
      * @Route("/{id}", name="home")
-     * @param $id
+     * @param $patient
      * @param PatientRepository $patientRepository
      * @param SessionInterface $session
      * @return Response
      */
-    public function index($id, PatientRepository $patientRepository, SessionInterface $session)
+    public function index(Patient $patient, SessionInterface $session)
     {
-        $patient = $patientRepository->findOneById($id);
         $session->set('patient', $patient);
         return $this->render('patient/index.html.twig', [
                 'patient' => $patient
@@ -77,6 +75,7 @@ class PatientController extends AbstractController
                                 DataCategoryRepository $categoryRepository,
                                 OverValueRepository $overValueRepository)
     {
+
         try {
             $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository);
         } catch (\Exception $e) {
@@ -84,6 +83,7 @@ class PatientController extends AbstractController
         }
 
         return new JsonResponse($responseCode);
+
     }
 
     /**

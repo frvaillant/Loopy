@@ -22,23 +22,23 @@ class PatientRepository extends ServiceEntityRepository
 {
     private MailingService $mailingService;
 
-    private SessionInterface $session;
 
-    public function __construct(ManagerRegistry $registry, MailingService $mailingService, SessionInterface $session)
+    public function __construct(ManagerRegistry $registry, MailingService $mailingService)
     {
         parent::__construct($registry, Patient::class);
         $this->mailingService = $mailingService;
-        $this->session = $session;
     }
 
-    public function saveData(
-        $glycemy, EntityManagerInterface $em,
-        DataCategoryRepository $categoryRepository,
-        OverValueRepository $overValueRepository
-    ) {
-        $patientId = $this->session->get('patient');
 
-        $patient = $this->find($patientId);
+    public function saveData(
+        $glycemy,
+        EntityManagerInterface $em,
+        DataCategoryRepository $categoryRepository,
+        OverValueRepository $overValueRepository,
+        SessionInterface $session
+    ) {
+        $patientId = $session->get('patient')->getId();
+        $patient = $this->findOneById($patientId);
         $data = new Data();
         $category = $categoryRepository->findOneBy([]);
         $data->setPatient($patient);

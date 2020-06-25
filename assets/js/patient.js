@@ -60,13 +60,27 @@ $(document).ready(function() {
                        $('#btn-up').removeClass('rotate');
                        $('#send-button-svg').addClass('d-none');
                        $('#glycemy-value').hide();
+                       $('#ardoise').hide();
                        $('#success').removeClass('d-none');
                        $('#' + data.state).removeClass('d-none');
                        document.getElementById('slider').classList.add('d-none');
                    }
             });
         })
-
-
-
+    const chapos = document.getElementsByClassName('chapo');
+    for (let i=0; i<chapos.length; i++) {
+        chapos[i].addEventListener('click', (e) => {
+            $('.chapo-c').each(function() {
+                $(this).css('display', 'none');
+            })
+            $('.chapo').each(function() {
+                $(this).css('display', 'block');
+            })
+            let id = chapos[i].getAttribute('id');
+            id = id.split('chapo');
+            id = id[1];
+            $('#chapo-c-' + id).css('display', 'block');
+            $('#chapo' + id).css('display', 'none');
+        })
+    }
 })
