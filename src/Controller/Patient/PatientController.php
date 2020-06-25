@@ -2,6 +2,8 @@
 
 namespace App\Controller\Patient;
 
+use App\Entity\Award;
+use App\Entity\Badge;
 use App\Entity\Data;
 use App\Entity\OverValue;
 use App\Entity\Patient;
@@ -9,6 +11,7 @@ use App\Repository\DataCategoryRepository;
 use App\Repository\DataRepository;
 use App\Repository\OverValueRepository;
 use App\Repository\PatientRepository;
+use App\Service\BadgeManager;
 use App\Service\MailingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,7 +42,9 @@ class PatientController extends AbstractController
      */
     public function check()
     {
-        $over = $this->getDoctrine()->getRepository(OverValue::class)->findAll();
+        $over = $this->getDoctrine()
+            ->getRepository(OverValue::class)
+            ->findAll();
         $result = [];
         foreach ($over as $key => $value) {
             $id = $value->getPatient()->getId();
@@ -59,12 +64,26 @@ class PatientController extends AbstractController
      * @param OverValueRepository $overValueRepository
      * @return JsonResponse
      */
-    public function sendMeasure ($glycemy, PatientRepository $patientRepository,  EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository)
+    public function sendMeasure($glycemy, PatientRepository $patientRepository, EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository, BadgeManager $badgeManager)
     {
         // $patient = $this->getUser();
         $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository);
 
-        return new JsonResponse($responseCode);
+        $data = count($this->getDoctrine()
+            ->getRepository(Data::class)
+            ->findBy(['patient' => 32]));
+
+        $patient = $this->getDoctrine()
+            ->getRepository(Patient::class)
+            ->findOneById(32);
+
+        $badges = $this->getDoctrine()
+            ->getRepository(Badge::class)
+            ->findAll();
+
+        $badge = $badgeManager->addBadge($patient, $data, $badges);
+
+        return new JsonResponse([$responseCode, $badge]);
     }
 
     /**
