@@ -2,13 +2,13 @@ function ajaxValue() {
     fetch('/check')
         .then(response => response.json())
         .then(data => {
-            for (var [key, value] of Object.entries(data)){
+            for (let [key, value] of Object.entries(data)){
                 if (document.getElementById(value)) {
-                    document.getElementById(value).classList.add = 'bg-primary'
+                    document.getElementById('label-' + value).classList.add("bck-red")
                 }
             }
         })
         .catch(() => console.log('toto'))
 }
 
-setInterval(ajaxValue, 5000)
+setInterval(ajaxValue, 6000)
