@@ -4,21 +4,21 @@ Chart.plugins.register([ChartAnnotation]); // Global
 
 document.addEventListener('DOMContentLoaded', () => {
     let patientId = document.getElementById('PatientId').getAttribute('data-id');
-    let lastSurvey = null, penultimateSurvey = null, threshold = null;
+    let beforeEat = null, afterEat = null, threshold = null;
     const ctx = document.getElementById('glycemia');
 
     fetch('/doctor/fetchData/' + patientId).then(response => {
         response.json().then(json => {
-            lastSurvey = json.lastSurvey
-            penultimateSurvey = json.penultimateSurvey
+            beforeEat = json.beforeEat
+            afterEat = json.afterEat
             threshold = json.threshold
             const glycemia = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: lastSurvey.addedAt,
+                    labels: beforeEat.addedAt,
                     datasets: [{
-                        label: 'Cette semaine',
-                        data: lastSurvey.value,
+                        label: 'Préprandiale',
+                        data: beforeEat.value,
                         borderColor: ['rgba(255, 99, 132, 1)'],
                         borderWidth: 3,
                         fill: false,
@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         pointRadius: 5,
                         pointHoverRadius: 10
                     }, {
-                        label: 'La semaine dernière',
-                        data: penultimateSurvey.value,
+                        label: 'Postprandiale',
+                        data: afterEat.value,
                         borderColor: ['rgba(0, 99, 132, 0.5)'],
                         borderWidth: 3,
                         borderDash: [10, 10],

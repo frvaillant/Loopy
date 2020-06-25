@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DoctorController extends AbstractController
 {
-    const NUMBER_OF_DATA = 28; // 7jours
+    const NUMBER_OF_DATA = 21; // 7jours
 
     /**
      * @Route("/doctor", name="doctor")
@@ -83,18 +83,18 @@ class DoctorController extends AbstractController
      */
     public function fetchData(Patient $patient, DataRepository $dataRepository, DataManager $dataManager): JsonResponse
     {
-        $lastSurvey = $dataRepository->findBy(['patient' => $patient], ['addedAt' => 'DESC'], self::NUMBER_OF_DATA);
-        $lastSurvey = $dataManager->prepareDataForGraphic($lastSurvey);
+        $beforeEat = $dataRepository->findBy(['patient' => $patient, 'hasEaten' => false], ['addedAt' => 'DESC'], self::NUMBER_OF_DATA);
+        $beforeEat = $dataManager->prepareDataForGraphic($beforeEat);
 
-        $penultimateSurvey = $dataRepository->findBy(['patient' => $patient], ['addedAt' => 'DESC'], self::NUMBER_OF_DATA, self::NUMBER_OF_DATA);
-        $penultimateSurvey = $dataManager->prepareDataForGraphic($penultimateSurvey);
+        $afterEat = $dataRepository->findBy(['patient' => $patient, 'hasEaten' => true], ['addedAt' => 'DESC'], self::NUMBER_OF_DATA, self::NUMBER_OF_DATA);
+        $afterEat = $dataManager->prepareDataForGraphic($afterEat);
 
         $threshold['min'] = $patient->getLimitDown();
         $threshold['max'] = $patient->getLimitUp();
 
         return new JsonResponse([
-            'lastSurvey' => $lastSurvey,
-            'penultimateSurvey' => $penultimateSurvey,
+            'beforeEat' => $beforeEat,
+            'afterEat' => $afterEat,
             'threshold' => $threshold
         ]);
     }
