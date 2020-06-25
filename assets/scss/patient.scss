@@ -1,3 +1,19 @@
+@keyframes rotatehand {
+  0% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(-70deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+#hand {
+
+}
+
 svg {
   #Calque_2 {
     position:relative;
