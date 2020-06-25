@@ -35,11 +35,11 @@ class PatientType extends AbstractType
             ])
             ->add('limitUp', IntegerType::class, [
                 'label' => false,
-                'attr'  => ['placeholder' => 'Seuil haut (mmg/dL)']
+                'attr'  => ['placeholder' => 'Seuil haut (mg/dL)']
             ])
             ->add('limitDown', IntegerType::class, [
                 'label' => false,
-                'attr'  => ['placeholder' => 'Seuil bas (mmg/dL)']
+                'attr'  => ['placeholder' => 'Seuil bas (mg/dL)']
             ])
             ->add('email', TextType::class, [
                 'label' => false
