@@ -7,6 +7,8 @@ use App\Form\PatientLimitType;
 use App\Form\PatientType;
 use App\Repository\DoctorRepository;
 use App\Repository\PatientRepository;
+use App\Service\MailingService;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\DataRepository;
 use App\Service\DataManager;
@@ -97,5 +99,33 @@ class DoctorController extends AbstractController
             'penultimateSurvey' => $penultimateSurvey,
             'threshold' => $threshold
         ]);
+    }
+
+    /**
+     * @Route("/doctor/email/send", name="doctor_email")
+     * @param Request $request
+     */
+    public function doctorSendMail(Request $request, MailingService $mailingService)
+    {
+        dump($request->request->all());
+        dump($request->files->get('files'));
+        if ($request->request->has('subject')) {
+            if ($request->files->has('files')) {
+                $brochureFile = $request->files->get('files');
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = str_replace(' ', '', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+                // Move the file to the directory where brochures are stored
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('files_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $mailingService->emailToParents($request->request, $newFilename);
+            }
+        }
     }
 }
