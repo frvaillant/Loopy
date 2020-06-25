@@ -17,7 +17,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
@@ -27,14 +26,13 @@ class PatientController extends AbstractController
 {
     /**
      * @Route("/{id}", name="home")
-     * @param $id
+     * @param $patient
      * @param PatientRepository $patientRepository
      * @param SessionInterface $session
      * @return Response
      */
-    public function index($id, PatientRepository $patientRepository, SessionInterface $session)
+    public function index(Patient $patient, SessionInterface $session)
     {
-        $patient = $patientRepository->findOneById($id);
         $session->set('patient', $patient);
         return $this->render('patient/index.html.twig', [
                 'patient' => $patient
@@ -78,7 +76,7 @@ class PatientController extends AbstractController
                                 BadgeManager $badgeManager,
                                 SessionInterface $session)
     {
-        $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository);
+        $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository, $session);
 
         $patient = $session->get('patient');
 
@@ -91,8 +89,8 @@ class PatientController extends AbstractController
             ->findAll();
 
         $badge = $badgeManager->addBadge($patient, $data, $badges);
-
-        return new JsonResponse([$responseCode, $badge]);
+        $response = array_merge($responseCode, $badge);
+        return new JsonResponse($response);
     }
 
     /**

@@ -50,7 +50,7 @@ $(document).ready(function() {
                 .then(response => {
                     return response.json()
                 }).then(data => {
-
+                    console.log(data)
                    if (data.response === 201) {
                        $('#doc-calque-3').css('display', 'block');
                        $('#btn-up').removeClass('rotate');
@@ -63,7 +63,20 @@ $(document).ready(function() {
                    }
             });
         })
-
-
-
+    const chapos = document.getElementsByClassName('chapo');
+    for (let i=0; i<chapos.length; i++) {
+        chapos[i].addEventListener('click', (e) => {
+            $('.chapo-c').each(function() {
+                $(this).css('display', 'none');
+            })
+            $('.chapo').each(function() {
+                $(this).css('display', 'block');
+            })
+            let id = chapos[i].getAttribute('id');
+            id = id.split('chapo');
+            id = id[1];
+            $('#chapo-c-' + id).css('display', 'block');
+            $('#chapo' + id).css('display', 'none');
+        })
+    }
 })

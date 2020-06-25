@@ -62,7 +62,13 @@ class BadgeManager
                 $award = null;
         }
         $this->em->flush();
-
-        return $award;
+        $response = [];
+        if (!is_null($award)) {
+            $response = [
+                'patientId' => $patient->getId(),
+                'badge' => $award->getBadge()->getId()
+            ];
+        }
+        return $response;
     }
 }
