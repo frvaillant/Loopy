@@ -4,12 +4,12 @@
     {{ form_widget(form.weight) }}
 </div>
 <div class="mt-4">
-    {{ form_label(form.limitUp) }}
-    {{ form_widget(form.limitUp) }}
-</div>
-    <div class="mt-4">
     {{ form_label(form.limitDown) }}
     {{ form_widget(form.limitDown) }}
+</div>
+<div class="mt-4">
+    {{ form_label(form.limitUp) }}
+    {{ form_widget(form.limitUp) }}
 </div>
 
 <button class="btn btn-primary mt-3 float-right mr-4">{{ button_label|default('Modifier !') }}</button>

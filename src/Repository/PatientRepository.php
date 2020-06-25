@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Data;
 use App\Entity\Patient;
+use App\Service\MailingService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,16 +18,19 @@ use \DateTime;
  */
 class PatientRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $mailingService;
+
+    public function __construct(ManagerRegistry $registry, MailingService $mailingService)
     {
         parent::__construct($registry, Patient::class);
+        $this->mailingService = $mailingService;
     }
 
-    public function saveData($glycemy, EntityManagerInterface $em, DataCategoryRepository $categoryRepository) {
-        $patientId = 94;
+    public function saveData($glycemy, EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository) {
+        $patientId = 22;
         $patient = $this->findOneById($patientId);
         $data = new Data();
-        $category = $categoryRepository->findOneById(4);
+        $category = $categoryRepository->findOneById(3);
         $data->setPatient($patient);
         $data->setValue($glycemy);
         $data->setDataCategory($category);
@@ -39,9 +43,13 @@ class PatientRepository extends ServiceEntityRepository
         $state = 'ok';
         if ($glycemy<$limitDown) {
             $state = 'less';
+            $overValueRepository->registerOverValue($patient, $em);
+            $this->mailingService->emailAlert($patient);
         }
         if ($glycemy>$limitUp) {
             $state = 'toomuch';
+            $overValueRepository->registerOverValue($patient, $em);
+            $this->mailingService->emailAlert($patient);
         }
         return ['response' => 201, 'state' => $state];
     }
