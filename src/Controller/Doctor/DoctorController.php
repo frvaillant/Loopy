@@ -89,10 +89,13 @@ class DoctorController extends AbstractController
         $penultimateSurvey = $dataRepository->findBy(['patient' => $patient], ['addedAt' => 'DESC'], self::NUMBER_OF_DATA, self::NUMBER_OF_DATA);
         $penultimateSurvey = $dataManager->prepareDataForGraphic($penultimateSurvey);
 
+        $threshold['min'] = $patient->getLimitDown();
+        $threshold['max'] = $patient->getLimitUp();
+
         return new JsonResponse([
             'lastSurvey' => $lastSurvey,
-            'penultimateSurvey' => $penultimateSurvey
-
+            'penultimateSurvey' => $penultimateSurvey,
+            'threshold' => $threshold
         ]);
     }
 }
