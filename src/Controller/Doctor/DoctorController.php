@@ -70,7 +70,7 @@ class DoctorController extends AbstractController
 
         return $this->render('doctor/onepatient.html.twig', [
             'choosenPatient' => $patient,
-            'patients' => $patientRepository->findAll(),
+            'patients' => $patientRepository->findBy([], ['surname' => 'ASC']),
             'form' => $form->createView()]);
     }
 
