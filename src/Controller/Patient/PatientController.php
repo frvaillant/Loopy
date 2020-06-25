@@ -23,10 +23,11 @@ class PatientController extends AbstractController
      * @Route("/", name="home")
      * @return Response
      */
-    public function index()
+    public function index(PatientRepository $patientRepository)
     {
+        $patient = $patientRepository->findOneById(22);
         return $this->render('patient/index.html.twig', [
-
+                'patient' => $patient
         ]);
     }
 

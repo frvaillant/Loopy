@@ -23,7 +23,7 @@ $(document).ready(function() {
             console.log(values[0]);
         });
 
-    const $glycemiTarget = $('#Calque_2');
+    const $glycemiTarget = $('#ardoise');
 
         const left = $glycemiTarget.position().left;
         const top = $glycemiTarget.position().top;
@@ -32,17 +32,17 @@ $(document).ready(function() {
 
         const glycemytext = $('#glycemy-value');
 
-        glycemytext.css('top', top).css('left', left).css('width', width).css('height', height);
+        //glycemytext.css('top', top).css('left', left).css('width', width).css('height', height);
         glycemytext.html('100');
 
         const sender = document.getElementById('send-button-svg');
         $('#send-button-svg').mousedown(function () {
-            $('#button-calque-1').css('display', 'none');
-            $('#button-calque-2').css('display', 'block');
+            $('#btn-up').css('display', 'none');
+            $('#btn-down').css('display', 'block');
         }).mouseup(function () {
-            $('#button-calque-1').css('display', 'block');
-            $('#button-calque-2').css('display', 'none');
-
+            $('#btn-up').css('display', 'block');
+            $('#bbtn-down').css('display', 'none');
+            $('#btn-up').addClass('rotate');
             const value = parseInt(glycemytext.html());
             console.log(value);
             fetch('/patient/measure/' + value, {
@@ -54,9 +54,12 @@ $(document).ready(function() {
                     console.log(data)
                    if (data.response === 201) {
                        $('#doc-calque-3').css('display', 'block');
+                       $('#btn-up').removeClass('rotate');
                        $('#send-button-svg').addClass('d-none');
+                       $('#glycemy-value').hide();
                        $('#success').removeClass('d-none');
                        $('#' + data.state).removeClass('d-none');
+                       document.getElementById('slider').classList.add('d-none');
                    }
             });
         })
