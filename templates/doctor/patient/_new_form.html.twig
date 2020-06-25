@@ -29,5 +29,6 @@
             {{ form_widget(form.limitUp, {'attr': {'class': 'width'}}) }}
         </div>
     </div>
+    {{ form_widget(form.email, {'attr': {'hidden' : 'hidden', 'value' : 'toto@loopy.fr'}}) }}
     <button class="btn btn-primary mt-4">{{ button_label|default('Ajouter !') }}</button>
 {{ form_end(form) }}
