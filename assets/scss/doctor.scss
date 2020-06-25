@@ -3,6 +3,19 @@
   box-shadow: 0 1px 1px grey;
 }
 
+.bck-grey {
+  background: linear-gradient(to bottom right, #b0bbc9, #dcdcdc, #b0bbc9, #dcdcdc);
+  box-shadow: 0 3px 3px grey;
+}
+
+.loopy-color-darken {
+  color: $loopy-blue;
+}
+
+.width {
+  width: 145px;
+}
+
 .chevron {
   display: inline-block;
   border-radius: 50%;

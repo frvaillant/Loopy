@@ -18,23 +18,28 @@ class PatientType extends AbstractType
     {
         $builder
             ->add('surname', TextType::class, [
-                'label'=> 'Nom'
+                'label' => false,
+                'attr'  => ['placeholder' => 'Nom']
             ])
             ->add('firstName', TextType::class, [
-                'label'=> 'Prénom'
+                'label' => false,
+                'attr'  => ['placeholder' => 'Prénom']
             ])
             ->add('birthday', BirthdayType::class, [
-                'widget'=> 'single_text',
-                'label'=>'Date de Naissance',
+                'label' => false,
+                'widget' => 'single_text'
             ])
             ->add('weight', IntegerType::class, [
-                'label'=> 'Poids (kg)'
+                'label' => false,
+                'attr'  => ['placeholder' => 'Poids (kg)']
             ])
             ->add('limitUp', IntegerType::class, [
-                'label'=>'Seuil haut (mmg/dL)'
+                'label' => false,
+                'attr'  => ['placeholder' => 'Seuil haut (mmg/dL)']
             ])
             ->add('limitDown', IntegerType::class, [
-                'label'=>'Seuil bas (mmg/dL'
+                'label' => false,
+                'attr'  => ['placeholder' => 'Seuil bas (mmg/dL)']
             ])
 
         ;
