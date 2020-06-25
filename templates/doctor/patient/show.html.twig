@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="col-3 overflow">
+            <div class="col-3 overflow" id="patient-list">
                 {% include '/doctor/components/_patient_list.html.twig' %}
             </div>
         </div>
@@ -41,4 +41,5 @@
 
 {% block javascript %}
 {{ encore_entry_script_tags('glycemia') }}
+{{ encore_entry_script_tags('ajaxValue') }}
 {% endblock %}
