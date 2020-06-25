@@ -27,10 +27,10 @@ class PatientRepository extends ServiceEntityRepository
     }
 
     public function saveData($glycemy, EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository) {
-        $patientId = 22;
+        $patientId = 94;
         $patient = $this->findOneById($patientId);
         $data = new Data();
-        $category = $categoryRepository->findOneById(3);
+        $category = $categoryRepository->findOneBy([]);
         $data->setPatient($patient);
         $data->setValue($glycemy);
         $data->setDataCategory($category);

@@ -20,8 +20,5 @@ const $ = require('jquery');
 // Bootstrap
 require('bootstrap');
 
-
 //Slider
 require ('noUiSlider');
-
-

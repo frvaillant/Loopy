@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ patient.firstName| capitalize ~ ' ' ~ patient.surname |upper }}{% endblock %}
+{% block title %}{{ patient.firstName | capitalize ~ ' ' ~ patient.surname | upper }}{% endblock %}
 
 {% block body %}
-    <div class="container-fluid bg-light-grey">
-        <input type="hidden" id="PatientId" data-id="{{ patient.id }}">
+    <input type="hidden" id="PatientId" data-id="{{ patient.id }}">
+    <div class="container-fluid bg-light-grey min-vh-100">
         <div class="row">
             {% for category, messages in app.flashes %}
                 {% for message in messages %}
@@ -20,13 +20,13 @@
                 <div class="m-auto">
                     <h3><i class="fas fa-user-injured mr-3"></i> {{ patient.firstName| capitalize ~ ' ' ~ patient.surname | upper }}</h3>
                     <h4 class="font-weight-lighter"><i class="fas fa-birthday-cake mr-3"></i> {{ patient.birthday | date ('d/m/Y') }} - {{ patient.age }} ans</h4>
-                    <h4 class="font-weight-lighter"><i class="fas fa-weight mr-3"></i>Poids (kg) {{ patient.weight }}</h4>
+                    <h4 class="font-weight-lighter"><i class="fas fa-weight mr-3"></i>Poids {{ patient.weight }} Kg</h4>
                 </div>
             </div>
             <div class="col-6 d-flex flex-column">
                 <div class="m-auto">
                     <h4 class="font-weight-lighter"><i class="fas fa-virus mr-3"></i> Diabète Insulino Dépendant</h4>
-                    <h4 class="font-weight-lighter"><i class="fas fa-stethoscope mr-3"></i> Doc T.Olib</h4>
+                    <h4 class="font-weight-lighter"><i class="fas fa-stethoscope mr-3"></i> {{ patient.doctor.doctorName }}</h4>
                     <h4 class="font-weight-lighter"><i class="fas fa-phone-square mr-3 "></i> 06.48.32.72.64</h4>
                 </div>
             </div>

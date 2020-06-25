@@ -48,6 +48,12 @@ class PatientController extends AbstractController
 
     /**
      * @Route("/patient/measure/{glycemy}", name="send_value", methods={"PUT"})
+     * @param $glycemy
+     * @param PatientRepository $patientRepository
+     * @param EntityManagerInterface $em
+     * @param DataCategoryRepository $categoryRepository
+     * @param OverValueRepository $overValueRepository
+     * @return JsonResponse
      */
     public function sendMeasure ($glycemy, PatientRepository $patientRepository,  EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository)
     {
@@ -58,11 +64,12 @@ class PatientController extends AbstractController
     }
 
     /**
-     * @Route("/parent/index/", name="send_value")
+     * @Route("/parent/{id}", name="send_value")
+     * @param Patient $patient
+     * @return Response
      */
-    public function parentTable()
+    public function parentTable(Patient $patient)
     {
-        $patient = $this->getDoctrine()->getRepository(Patient::class)->find(94);
         return $this->render('patient/parent.html.twig', [
             'patient' => $patient,
         ]);
