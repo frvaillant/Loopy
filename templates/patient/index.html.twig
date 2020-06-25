@@ -6,10 +6,19 @@
 
     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item loopyblue active" data-interval="">
+            <div class="carousel-item loopyblue active text-center" data-interval="">
+                {{include('svg/logo.html.twig')}}
+                <div class="patient-name">
+                    Bonjour {{patient.firstname}}
+                </div>
+
+                    <a href="/parent/{{ patient.id }}" class="btn btn-dark btn-for-parents">Parents</a>
+
+            </div>
+            <div class="carousel-item loopyblue" data-interval="">
                 <div id="slider"></div>
+                <div id="glycemy-value"></div>
                 <div id="loopy-1">
-                    <div id="glycemy-value"></div>
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="600px"
                          height="1000px" viewBox="0 0 600 1000" enable-background="new 0 0 600 1000" xml:space="preserve">
                        <symbol  id="Herbe_4" viewBox="-22.384 -11.915 44.766 23.829">
@@ -675,7 +684,7 @@
 
                             <use xlink:href="#Herbe_4"  width="44.766" height="23.829" x="-22.384" y="-11.915" transform="matrix(7.6875 0 0 -7.6875 478.6055 953.9873)" overflow="visible"/>
                         </g>
-                        <g id="Calque_2">
+                        <g id="ardoise">
 
                             <path fill="#F2F2F2" stroke="#FFFFFF" stroke-width="8.1452" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 		M579.24,439.705c0,26.604-21.565,48.169-48.17,48.169H396.368c-26.603,0-48.168-21.564-48.168-48.169l0,0
@@ -1151,30 +1160,43 @@
                 <div class="semi" id="send-button">
                     <svg id="send-button-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="300px"
                          height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
-                        <g id="button-calque-1">
-    <path fill="#37657E" d="M227.995,81.262c-19.044-16.565-43.902-26.618-71.124-26.618C96.976,54.645,48.42,103.2,48.42,163.096
-		c0,27.22,10.051,52.077,26.613,71.119c19.883,22.859,49.162,37.332,81.838,37.332c59.896,0,108.451-48.555,108.451-108.451
-		C265.322,130.421,250.853,101.146,227.995,81.262z"/>
-    <path fill="#A30D0D" d="M221.632,67.954c16.562,19.042,26.613,43.899,26.613,71.119c0,59.896-48.556,108.452-108.451,108.452
-		c-27.222,0-52.081-10.054-71.124-26.618c19.883,22.859,49.162,37.332,81.838,37.332c59.896,0,108.451-48.555,108.451-108.451
-		C258.959,117.113,244.489,87.837,221.632,67.954z"/>
-    <path fill="#FF0000" d="M248.245,139.073c0-27.22-10.051-52.077-26.613-71.119c-19.044-16.565-43.902-26.618-71.124-26.618
-		c-59.896,0-108.451,48.555-108.451,108.451c0,27.22,10.051,52.077,26.613,71.119c19.043,16.564,43.902,26.618,71.124,26.618
-		C199.689,247.524,248.245,198.969,248.245,139.073z"/>
-
-    <polygon fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5.0875" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		154.429,114.012 154.429,127.152 110.265,127.152 110.265,161.56 154.429,161.56 154.429,174.847 198.023,144.602 	"/>
-</g>
-                        <g id="button-calque-2" display="none">
-                            <path display="inline" fill="#A30D0D" d="M227.995,81.262c16.562,19.042,26.613,43.899,26.613,71.119
-		c0,59.896-48.556,108.452-108.451,108.452c-27.222,0-52.081-10.054-71.124-26.618c19.883,22.859,49.162,37.332,81.838,37.332
-		c59.896,0,108.451-48.555,108.451-108.451C265.322,130.421,250.853,101.146,227.995,81.262z"/>
-                            <path display="inline" fill="#FF0000" d="M254.608,152.381c0-27.219-10.051-52.076-26.613-71.119
-		c-19.044-16.565-43.902-26.618-71.124-26.618C96.976,54.645,48.42,103.2,48.42,163.096c0,27.22,10.051,52.077,26.613,71.119
-		c19.043,16.564,43.902,26.618,71.124,26.618C206.053,260.833,254.608,212.277,254.608,152.381z"/>
+                        <g id="btn-shadow">
+                            <path fill="#37657E" d="M227.269,78.5c-19.044-16.565-43.902-26.618-71.124-26.618C96.25,51.883,47.693,100.438,47.693,160.334
+		c0,27.221,10.051,52.076,26.613,71.119c19.883,22.859,49.162,37.332,81.838,37.332c59.896,0,108.451-48.555,108.451-108.451
+		C264.596,127.659,250.127,98.384,227.269,78.5z"/>
+                        </g>
+                        <g id="btn-down" display="none">
+                            <path display="inline" fill="#A30D0D" d="M227.269,78.5c16.562,19.042,26.613,43.899,26.613,71.119
+		c0,59.896-48.556,108.452-108.451,108.452c-27.222,0-52.081-10.055-71.124-26.618c19.883,22.858,49.162,37.332,81.838,37.332
+		c59.896,0,108.451-48.556,108.451-108.451C264.596,127.659,250.125,98.383,227.269,78.5z"/>
+                            <path display="inline" fill="#FF0000" d="M253.882,149.619c0-27.22-10.052-52.077-26.613-71.119
+		c-19.044-16.565-43.901-26.618-71.124-26.618c-59.896,0-108.451,48.555-108.451,108.451c0,27.22,10.051,52.076,26.613,71.119
+		c19.043,16.563,43.902,26.617,71.124,26.617C205.326,258.069,253.882,209.515,253.882,149.619z"/>
 
                             <polygon display="inline" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5.0875" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		160.792,127.321 160.792,140.46 116.628,140.46 116.628,174.868 160.792,174.868 160.792,188.155 204.387,157.91 	"/>
+		160.066,124.558 160.066,137.698 115.902,137.698 115.902,172.106 160.066,172.106 160.066,185.394 203.66,155.148 	"/>
+                        </g>
+                        <g id="btn-up">
+                            <path fill="#A30D0D" d="M221.632,67.954c16.562,19.042,26.613,43.899,26.613,71.119c0,59.896-48.556,108.452-108.451,108.452
+		c-27.222,0-52.081-10.055-71.124-26.618c19.883,22.858,49.162,37.332,81.838,37.332c59.896,0,108.451-48.556,108.451-108.451
+		C258.959,117.113,244.488,87.837,221.632,67.954z"/>
+                            <path fill="#FF0000" d="M248.245,139.073c0-27.22-10.052-52.077-26.613-71.119c-19.044-16.565-43.901-26.618-71.124-26.618
+		c-59.896,0-108.451,48.555-108.451,108.451c0,27.22,10.051,52.076,26.613,71.119c19.043,16.563,43.902,26.617,71.124,26.617
+		C199.689,247.523,248.245,198.969,248.245,139.073z"/>
+
+                            <polygon fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5.0875" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+		154.43,114.012 154.43,127.152 110.265,127.152 110.265,161.561 154.43,161.561 154.43,174.848 198.023,144.602 	"/>
+                            <g id="Calque_2" display="none">
+                                <path display="inline" fill="#A30D0D" d="M227.995,81.262c16.562,19.042,26.612,43.899,26.612,71.119
+			c0,59.896-48.556,108.452-108.45,108.452c-27.222,0-52.081-10.054-71.124-26.618c19.883,22.859,49.162,37.332,81.838,37.332
+			c59.896,0,108.451-48.555,108.451-108.451C265.322,130.421,250.854,101.146,227.995,81.262z"/>
+                                <path display="inline" fill="#FF0000" d="M254.607,152.381c0-27.219-10.051-52.076-26.612-71.119
+			c-19.044-16.565-43.902-26.618-71.124-26.618C96.976,54.645,48.42,103.2,48.42,163.096c0,27.221,10.051,52.077,26.613,71.119
+			c19.043,16.564,43.902,26.618,71.124,26.618C206.053,260.833,254.607,212.277,254.607,152.381z"/>
+
+                                <polygon display="inline" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5.0875" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
+			160.792,127.321 160.792,140.46 116.628,140.46 116.628,174.868 160.792,174.868 160.792,188.154 204.387,157.91 		"/>
+                            </g>
                         </g>
 </svg>
                     <div id="success" class="d-none">{{ include ('svg/loopy_allonge.html.twig') }}</div>
@@ -1182,18 +1204,16 @@
             </div>
             <div class="carousel-item loopyblue" data-interval="">
                 <div class="final">
-                    <img src="{{ asset('build/images/eqmoins.svg') }}" width="100%" id="less" class="d-none">
-                    <img src="{{ asset('build/images/eqok.svg') }}" width="100%" id="ok" class="d-none">
-                    <img src="{{ asset('build/images/eqtrop.svg') }}" width="100%" id="toomuch" class="d-none">
+                    <div id="less" class="d-none">{{ include ('svg/loopy_down.html.twig') }}</div>
+                    <div id="ok" class="d-none">{{ include ('svg/loopy_ok.html.twig') }}</div>
+                    <div id="toomuch" class="d-none">{{ include ('svg/loopy_up.html.twig') }}</div>
                 </div>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
     </div>
