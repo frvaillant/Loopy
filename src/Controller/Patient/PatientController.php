@@ -2,6 +2,8 @@
 
 namespace App\Controller\Patient;
 
+use App\Entity\Award;
+use App\Entity\Badge;
 use App\Entity\Data;
 use App\Entity\OverValue;
 use App\Entity\Patient;
@@ -9,11 +11,13 @@ use App\Repository\DataCategoryRepository;
 use App\Repository\DataRepository;
 use App\Repository\OverValueRepository;
 use App\Repository\PatientRepository;
+use App\Service\BadgeManager;
 use App\Service\MailingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
 use Symfony\Component\Validator\Constraints\Json;
@@ -21,13 +25,16 @@ use Symfony\Component\Validator\Constraints\Json;
 class PatientController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/{id}", name="home")
      * @return Response
      */
-    public function index()
+    public function index($id, PatientRepository $patientRepository)
     {
+        $session=new Session();
+        $session->set('patient', $id);
+        $patient = $patientRepository->findOneById($id);
         return $this->render('patient/index.html.twig', [
-
+                'patient' => $patient
         ]);
     }
 
@@ -36,7 +43,9 @@ class PatientController extends AbstractController
      */
     public function check()
     {
-        $over = $this->getDoctrine()->getRepository(OverValue::class)->findAll();
+        $over = $this->getDoctrine()
+            ->getRepository(OverValue::class)
+            ->findAll();
         $result = [];
         foreach ($over as $key => $value) {
             $id = $value->getPatient()->getId();
@@ -49,21 +58,42 @@ class PatientController extends AbstractController
 
     /**
      * @Route("/patient/measure/{glycemy}", name="send_value", methods={"PUT"})
+     * @param $glycemy
+     * @param PatientRepository $patientRepository
+     * @param EntityManagerInterface $em
+     * @param DataCategoryRepository $categoryRepository
+     * @param OverValueRepository $overValueRepository
+     * @return JsonResponse
      */
-    public function sendMeasure ($glycemy, PatientRepository $patientRepository,  EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository)
+    public function sendMeasure($glycemy, PatientRepository $patientRepository, EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository, BadgeManager $badgeManager)
     {
         // $patient = $this->getUser();
         $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository);
 
-        return new JsonResponse($responseCode);
+        $data = count($this->getDoctrine()
+            ->getRepository(Data::class)
+            ->findBy(['patient' => 32]));
+
+        $patient = $this->getDoctrine()
+            ->getRepository(Patient::class)
+            ->findOneById(32);
+
+        $badges = $this->getDoctrine()
+            ->getRepository(Badge::class)
+            ->findAll();
+
+        $badge = $badgeManager->addBadge($patient, $data, $badges);
+
+        return new JsonResponse([$responseCode, $badge]);
     }
 
     /**
-     * @Route("/parent/index/", name="send_value")
+     * @Route("/parent/{id}", name="parent")
+     * @param Patient $patient
+     * @return Response
      */
-    public function parentTable()
+    public function parentTable(Patient $patient)
     {
-        $patient = $this->getDoctrine()->getRepository(Patient::class)->find(94);
         return $this->render('patient/parent.html.twig', [
             'patient' => $patient,
         ]);

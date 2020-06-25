@@ -27,7 +27,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('patient', './assets/js/patient.js')
     .addEntry('glycemia', './assets/js/ChartJs/glycemia.js')
-    //.addEntry('page2', './assets/js/page2.js')
+    .addEntry('ajaxValue', './assets/js/ajaxValue.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

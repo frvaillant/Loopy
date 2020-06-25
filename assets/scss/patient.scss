@@ -10,6 +10,231 @@
   }
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes oscillate-light {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-2deg);
+  }
+  75% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes chapo-right {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(30deg);
+  }
+}
+
+@keyframes anim-bras {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(20deg);
+  }
+  60% {
+    transform: rotate(-40deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.anim-bras {
+  transform-origin: 123px  121px;
+  animation: anim-bras 2s infinite;
+}
+
+.chapo-right {
+  transform-origin: center left;
+  transform: rotate(30deg);
+  animation: chapo-right 2s ease-in-out;
+}
+
+@keyframes translateleft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(500px);
+  }
+}
+
+@keyframes translateright {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-500px);
+  }
+}
+
+.translateleft {
+  animation:translateleft 30s ease-in-out;
+}
+.translateright {
+  animation:translateright 40s ease-in-out;
+}
+
+
+@keyframes chapo-left {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-30deg);
+  }
+}
+
+.chapo-left {
+  transform-origin: center center;
+  transform: rotate(-30deg);
+  animation: chapo-left 2s ease-in-out;
+}
+
+
+@keyframes bascule-left {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(-7deg);
+  }
+  100% {
+    transform: rotate(-45deg);
+  }
+}
+
+
+.btn-for-parents {
+  margin-top:60px;
+  border-radius:200px;
+  border:6px solid #000;
+}
+
+.bascule-left {
+  transform-origin:center 60%;
+  animation:bascule-left 2s ease-in-out;
+  transform: rotate(-45deg);
+}
+
+
+
+@keyframes bascule-right {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+.bascule-right {
+  transform-origin:center center;
+  animation:bascule-right 2s ease-in-out;
+  transform: rotate(45deg);
+}
+
+.oscillate-light {
+  transform-origin:bottom center;
+  animation:oscillate-light 3s infinite;
+}
+
+@keyframes oscillate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.oscillate {
+  transform-origin:center center;
+  animation:oscillate 3s infinite;
+}
+.rotate {
+  transform-origin:center center;
+  animation:rotate 1s infinite;
+}
+
+.patient-name {
+  width:60vw;
+  text-align:center;
+  margin-left:20vw;
+  display:block;
+  background:#fff;
+  color:#414141;
+  font-family: $neucha;
+  font-size: 1.5rem;
+  border-radius:200px;
+  border:7px solid #000;
+  padding-top:7px;
+  position:relative;
+  &::before {
+    dipslay:block;
+    position:absolute;
+    content:' ';
+    left:0;
+    width:20px;
+    height:30px;
+    border-radius:50% 0 0 50%;
+    background:#000;
+    top:50%;
+    margin-top:-15px;
+    margin-left:-20px;
+  }
+  &::after {
+    dipslay:block;
+    position:absolute;
+    content:' ';
+    right:0;
+    width:20px;
+    height:30px;
+    border-radius:0 50% 50% 0;
+    background:#000;
+    top:50%;
+    margin-top:-15px;
+    margin-right:-21px;
+  }
+  span {
+    font-size : 4rem;
+  }
+}
+
 #success {
   height:100%;
   margin-top:20px;
@@ -36,6 +261,8 @@ svg {
   font-family: $neucha;
   font-weight: bold;
   text-shadow:2px 2px 3px rgba(0,0,0,0.7);
+  right:50px;
+  top:34vh;
 }
 #Calque_3 {
   z-index:999999;

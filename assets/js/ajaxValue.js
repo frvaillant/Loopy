@@ -11,4 +11,7 @@ function ajaxValue() {
         .catch(() => console.log('toto'))
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    ajaxValue();
+})
 setInterval(ajaxValue, 6000)
