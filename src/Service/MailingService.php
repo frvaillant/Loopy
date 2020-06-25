@@ -58,4 +58,19 @@ class MailingService
             ]);
         $this->mailer->send($email);
     }
+
+    public function emailToParents($request, $filesName)
+    {
+        $email = (new TemplatedEmail())
+            ->from($this->container->getParameter('mailer_from'))
+            ->to('emailbidon@bidon.fr')
+            ->subject($request->get('subject'))
+            ->htmlTemplate('mail/message.html.twig')
+            ->attachFromPath($this->container->getParameter('files_directory') . '/' . $filesName)
+            ->context([
+                'subject' => $request->get('subject'),
+                'content' => $request->get('content'),
+            ]);
+        $this->mailer->send($email);
+    }
 }
