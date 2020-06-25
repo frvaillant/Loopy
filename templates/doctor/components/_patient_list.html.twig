@@ -9,7 +9,7 @@
     <tbody>
     {% for patient in patients %}
             <tr id="{{ patient.id }}">
-                <th scope="row" class="p-1"><div id="label-{{ patient.id }}" class="chevron ml-1 mt-2"><i class="fas fa-angle-right"></i></div></th>
+                <th scope="row" class="p-1"><div id="label-{{ patient.id }}" class="chevron ml-1 mt-2 d-flex align-items-center justify-content-center"><i class="fas fa-angle-right"></i></div></th>
                 <td class="p-0 pt-2 pl-2"><a href="{{ path('doctor_patient', {'id': patient.id}) }}" class="text-dark text-decoration-none">{{patient.firstName ~ ' ' ~ patient.surname |upper}}</a></td>
             </tr>
     {% endfor %}

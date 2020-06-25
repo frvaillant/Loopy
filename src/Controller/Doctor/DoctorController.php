@@ -43,7 +43,7 @@ class DoctorController extends AbstractController
             return $this->redirectToRoute('doctor');
         }
         return $this->render('doctor/index.html.twig', [
-            'patients' => $patientRepository->findAll(),
+            'patients' => $patientRepository->findBy([], ['surname' => 'ASC']),
             'form' => $form->createView(),
             'doctor' => $doctorRepository->findOneBy(['surname' => 'Olib']),
         ]);
@@ -70,7 +70,7 @@ class DoctorController extends AbstractController
 
         return $this->render('doctor/patient/show.html.twig', [
             'choosenPatient' => $patient,
-            'patients' => $patientRepository->findAll(),
+            'patients' => $patientRepository->findBy([], ['surname' => 'ASC']),
             'form' => $form->createView()]);
     }
 
@@ -89,10 +89,13 @@ class DoctorController extends AbstractController
         $penultimateSurvey = $dataRepository->findBy(['patient' => $patient], ['addedAt' => 'DESC'], self::NUMBER_OF_DATA, self::NUMBER_OF_DATA);
         $penultimateSurvey = $dataManager->prepareDataForGraphic($penultimateSurvey);
 
+        $threshold['min'] = $patient->getLimitDown();
+        $threshold['max'] = $patient->getLimitUp();
+
         return new JsonResponse([
             'lastSurvey' => $lastSurvey,
-            'penultimateSurvey' => $penultimateSurvey
-
+            'penultimateSurvey' => $penultimateSurvey,
+            'threshold' => $threshold
         ]);
     }
 }
