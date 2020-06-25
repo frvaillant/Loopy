@@ -43,7 +43,7 @@ class DoctorController extends AbstractController
             return $this->redirectToRoute('doctor');
         }
         return $this->render('doctor/index.html.twig', [
-            'patients' => $patientRepository->findAll(),
+            'patients' => $patientRepository->findBy([], ['surname' => 'ASC']),
             'form' => $form->createView(),
             'doctor' => $doctorRepository->findOneBy(['surname' => 'Olib']),
         ]);
