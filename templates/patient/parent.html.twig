@@ -18,16 +18,16 @@
         <div class="row mt-5">
             <div class="col-6 d-flex flex-column">
                 <div class="m-auto">
-                    <h3><i class="fas fa-user-injured mr-3"></i> {{ patient.firstName| capitalize ~ ' ' ~ patient.surname | upper }}</h3>
-                    <h4 class="font-weight-lighter"><i class="fas fa-birthday-cake mr-3"></i> {{ patient.birthday | date ('d/m/Y') }} - {{ patient.age }} ans</h4>
-                    <h4 class="font-weight-lighter"><i class="fas fa-weight mr-3"></i>Poids {{ patient.weight }} Kg</h4>
+                    <h3><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-user-injured mt-1"></i></span> {{ patient.firstName| capitalize ~ ' ' ~ patient.surname | upper }}</h3>
+                    <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-birthday-cake mt-1"></i></span> {{ patient.birthday | date ('d/m/Y') }} - {{ patient.age }} ans</h4>
+                    <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-weight mt-1"></i></span> Poids {{ patient.weight }} Kg</h4>
                 </div>
             </div>
             <div class="col-6 d-flex flex-column">
                 <div class="m-auto">
-                    <h4 class="font-weight-lighter"><i class="fas fa-virus mr-3"></i> Diabète Insulino Dépendant</h4>
-                    <h4 class="font-weight-lighter"><i class="fas fa-stethoscope mr-3"></i> {{ patient.doctor.doctorName }}</h4>
-                    <h4 class="font-weight-lighter"><i class="fas fa-phone-square mr-3 "></i> 06.48.32.72.64</h4>
+                    <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-virus mt-1"></i></span> Diabète Insulino Dépendant</h4>
+                    <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-stethoscope mt-1"></i></span> {{ patient.doctor.doctorName }}</h4>
+                    <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-phone-square mt-1"></i></span> 06.48.32.72.64</h4>
                 </div>
             </div>
         </div>
