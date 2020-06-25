@@ -1,8 +1,11 @@
+import Chart from 'chart.js';
+
 document.addEventListener('DOMContentLoaded', () => {
+    let patientId = document.getElementById('PatientId').getAttribute('data-id');
     let lastSurvey = null, penultimateSurvey = null;
     const ctx = document.getElementById('glycemia');
 
-    fetch('doctor/fetchData/32').then(response => {
+    fetch('/doctor/fetchData/' + patientId).then(response => {
         response.json().then(json => {
             lastSurvey = json.lastSurvey
             penultimateSurvey = json.penultimateSurvey

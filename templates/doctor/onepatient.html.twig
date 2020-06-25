@@ -14,7 +14,7 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
-                <input type="hidden" data-id="{{ choosenPatient.id }}">
+                <input type="hidden" id="PatientId" data-id="{{ choosenPatient.id }}">
                 <div class="row">
                     <!--chart-->
                     <div class="col-5">
@@ -24,10 +24,17 @@
                         {{ include('/doctor/patient/_form_edit_limit.html.twig') }}
                     </div>
                 </div>
+                <div class="canvas">
+                    <canvas id="glycemia" width="400" height="400"></canvas>
+                </div>
             </div>
             <div class="col-3">
                 {% include '/doctor/_sidenav.html.twig' %}
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('glycemia') }}
 {% endblock %}

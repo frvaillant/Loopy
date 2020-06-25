@@ -34,7 +34,7 @@ class DoctorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $patient->setDoctor($doctorRepository->findOneBy(['id'=>1]));
+            $patient->setDoctor($doctorRepository->findOneBy(['id' => 1]));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($patient);
             $entityManager->flush();
@@ -43,8 +43,8 @@ class DoctorController extends AbstractController
             return $this->redirectToRoute('doctor');
         }
         return $this->render('doctor/index.html.twig', [
-            'patients'=> $patientRepository->findAll(),
-            'form'=> $form->createView(),
+            'patients' => $patientRepository->findAll(),
+            'form' => $form->createView(),
             'doctor' => $doctorRepository->findOneBy(['surname' => 'Olib']),
         ]);
     }
@@ -65,16 +65,16 @@ class DoctorController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Les données de ' . $patient->getFirstName() . ' ont été mises à jour');
 
-            return $this->redirectToRoute('doctor_patient', ['id'=>$patient->getId()]);
+            return $this->redirectToRoute('doctor_patient', ['id' => $patient->getId()]);
         }
 
         return $this->render('doctor/onepatient.html.twig', [
-            'choosenPatient'=> $patient,
-            'patients'=> $patientRepository->findAll(),
-            'form'=> $form->createView()]);
-        }
+            'choosenPatient' => $patient,
+            'patients' => $patientRepository->findAll(),
+            'form' => $form->createView()]);
+    }
 
-     /**
+    /**
      * @Route("/doctor/fetchData/{id}", name="fetch_data")
      * @param Patient $patient
      * @param DataRepository $dataRepository
