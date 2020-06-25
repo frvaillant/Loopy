@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use \DateTime;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @method Patient|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,18 +22,25 @@ class PatientRepository extends ServiceEntityRepository
 {
     private MailingService $mailingService;
 
-    public function __construct(ManagerRegistry $registry, MailingService $mailingService)
+    private SessionInterface $session;
+
+    public function __construct(ManagerRegistry $registry, MailingService $mailingService, SessionInterface $session)
     {
         parent::__construct($registry, Patient::class);
         $this->mailingService = $mailingService;
+        $this->session = $session;
     }
 
-    public function saveData($glycemy, EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository) {
 
-        $patientId = 22;
-        $patient = $this->findOneById($patientId);
+    public function saveData(
+        $glycemy, EntityManagerInterface $em,
+        DataCategoryRepository $categoryRepository,
+        OverValueRepository $overValueRepository
+    ) {
+        $patientId = $this->session->get('patient');
+        $patient = $this->find($patientId);
         $data = new Data();
-        $category = $categoryRepository->findOneById(1);
+        $category = $categoryRepository->findOneBy([]);
         $data->setPatient($patient);
         $data->setValue($glycemy);
         $data->setDataCategory($category);
@@ -43,12 +51,12 @@ class PatientRepository extends ServiceEntityRepository
         $limitUp = $patient->getLimitUp();
         $limitDown = $patient->getLimitDown();
         $state = 'ok';
-        if ($glycemy<$limitDown) {
+        if ($glycemy < $limitDown) {
             $state = 'less';
             $overValueRepository->registerOverValue($patient, $em);
             $this->mailingService->emailAlert($patient, 'down');
         }
-        if ($glycemy>$limitUp) {
+        if ($glycemy > $limitUp) {
             $state = 'toomuch';
             $overValueRepository->registerOverValue($patient, $em);
             $this->mailingService->emailAlert($patient);
