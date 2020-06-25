@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
+use Symfony\Component\Validator\Constraints\Json;
 
 class PatientController extends AbstractController
 {
@@ -66,5 +67,24 @@ class PatientController extends AbstractController
         return $this->render('patient/parent.html.twig', [
             'patient' => $patient,
         ]);
+    }
+
+    /**
+     * @Route("/patient/overvalue/delete/{id}", name="delete_overvalue")
+     * @param $id
+     * @param PatientRepository $patientRepository
+     * @param OverValueRepository $overValueRepository
+     * @return JsonResponse
+     */
+    public function deleteOverValue($id, PatientRepository $patientRepository, OverValueRepository $overValueRepository): JsonResponse
+    {
+        $patient = $patientRepository->find($id);
+        $overValue = $overValueRepository->findBy(['patient' => $patient]);
+        foreach ($overValue as $value) {
+            $this->getDoctrine()->getManager()->remove($value);
+        }
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse();
     }
 }
