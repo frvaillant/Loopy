@@ -24,14 +24,20 @@ class PatientFixtures extends Fixture implements DependentFixtureInterface
             $month = rand(1, 12);
             $year  = rand(2008, 2014);
             $patient = new Patient();
-            $patient->setFirstName($firstName);
-            $patient->setSurname($lastName);
-            $patient->setEmail($email);
-            $patient->setBirthday(new DateTime($year . '-' . $month . '-' . $day));
-            $patient->setWeight(rand(22, 40));
-            $patient->setDoctor($this->getReference('doctor'));
-            $patient->setLimitDown(rand(50, 70));
-            $patient->setLimitUp(rand(190, 210));
+            $patient->setFirstName($firstName)
+                ->setSurname($lastName)
+                ->setEmail($email)
+                ->setBirthday(new DateTime($year . '-' . $month . '-' . $day))
+                ->setWeight(rand(22, 40))
+                ->setDoctor($this->getReference('doctor'))
+                ->setLimitDown(rand(50, 70))
+                ->setLimitUp(rand(190, 210))
+                ->setDadSurname($lastName)
+                ->setDadFirstname($faker->firstNameMale)
+                ->setDadPhoneNumber('632987787')
+                ->setMomSurname($lastName)
+                ->setMomFirstName($faker->firstNameFemale)
+                ->setMomPhoneNumber('612345678');
             $manager->persist($patient);
             $this->setReference('patient_' . $i, $patient);
         }

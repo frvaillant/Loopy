@@ -7,7 +7,7 @@
     <div class="font-oswald">
         <div class="d-flex">
 
-            <div class="col-9 pt-5 bg-light-grey">
+            <div class="col-9 pt-5 bg-light-grey overflow">
                 {% for category, messages in app.flashes %}
                     {% for message in messages %}
                         <div class="alert alert-{{ category }} text-center container mt-5">
@@ -19,20 +19,60 @@
 
                 <div class="d-flex justify-content-around">
                     <div class="d-flex flex-column justify-content-around">
-                        <h3 class="d-flex align-items-center"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-user-injured "></i></span> {{ choosenPatient.firstName| capitalize ~ ' ' ~ choosenPatient.surname | upper }}</h3>
-                        <h4 class="font-weight-lighter d-flex align-items-center"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-birthday-cake pt-1"></i></span>{{ choosenPatient.birthday | date ('d/m/Y') }} - {{ choosenPatient.age }} ans</h4>
-                        <h4 class="font-weight-lighter d-flex align-items-center"><span class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-virus pt-1"></i></span> Diabète Insulino Dépendant</h4>
+                        <h3 class="d-flex align-items-center"><span
+                                    class="show-icon bg-white text-center mr-3 shadow"><i
+                                        class="fas fa-user-injured "></i></span> {{ choosenPatient.firstName| capitalize ~ ' ' ~ choosenPatient.surname | upper }}
+                        </h3>
+                        <h4 class="font-weight-lighter d-flex align-items-center"><span
+                                    class="show-icon bg-white text-center mr-3 shadow"><i
+                                        class="fas fa-birthday-cake pt-1"></i></span>{{ choosenPatient.birthday | date ('d/m/Y') }}
+                            - {{ choosenPatient.age }} ans</h4>
+                        <h4 class="font-weight-lighter d-flex align-items-center"><span
+                                    class="show-icon bg-white text-center mr-3 shadow"><i class="fas fa-virus pt-1"></i></span>
+                            Diabète Insulino Dépendant</h4>
                     </div>
                     {{ include('/doctor/patient/_edit_limit_form.html.twig') }}
                 </div>
+
+                {% if choosenPatient.dadSurname or choosenPatient.momSurname %}
+                    <hr>
+                    <p class="text-center">
+                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                           aria-controls="collapseExample" class="text-blue">Parents</a>
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                        {% if choosenPatient.dadSurname %}
+                        <div class="d-flex justify-content-around container">
+                            <div class="card parent-card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2 text-muted">Père</h6>
+                                    <h5 class="card-title">{{ choosenPatient.dadFullName }}</h5>
+                                    <p class="card-text">Téléphone : {{ choosenPatient.dadFormattedPhoneNumber }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if choosenPatient.momSurname %}
+                                <div class="card parent-card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Mère</h6>
+                                        <h5 class="card-title">{{ choosenPatient.momFullName }}</h5>
+                                        <p class="card-text">Téléphone : {{ choosenPatient.momFormattedPhoneNumber }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
                 <hr>
+
                 <h2 class="text-center mt-5">Glycémie sur une semaine</h2>
                 <div class="canvas">
                     <canvas id="glycemia"></canvas>
                 </div>
             </div>
 
-            <div class="col-3 overflow" id="patient-list">
+            <div class="col-3 overflow shadow-list" id="patient-list">
                 {% include '/doctor/components/_patient_list.html.twig' %}
             </div>
         </div>
