@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\OverValue;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,16 @@ class OverValueRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, OverValue::class);
+    }
+
+    public function registerOverValue($patient, EntityManagerInterface $em)
+    {
+        $overpass = new OverValue();
+        $overpass->setPatient($patient);
+        $overpass->setHasValue(true);
+        $em->persist($overpass);
+        $em->flush();
+
     }
 
     // /**
