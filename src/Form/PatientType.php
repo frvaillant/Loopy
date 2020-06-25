@@ -41,8 +41,9 @@ class PatientType extends AbstractType
                 'label' => false,
                 'attr'  => ['placeholder' => 'Seuil bas (mmg/dL)']
             ])
-
-        ;
+            ->add('email', TextType::class, [
+                'label' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -15,6 +15,7 @@ use App\Repository\PatientRepository;
 use App\Service\BadgeManager;
 use App\Service\MailingService;
 use Doctrine\ORM\EntityManagerInterface;
+use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,33 +69,21 @@ class PatientController extends AbstractController
      * @param EntityManagerInterface $em
      * @param DataCategoryRepository $categoryRepository
      * @param OverValueRepository $overValueRepository
-     * @param BadgeManager $badgeManager
-     * @param SessionInterface $session
      * @return JsonResponse
      */
     public function sendMeasure($glycemy,
                                 PatientRepository $patientRepository,
                                 EntityManagerInterface $em,
                                 DataCategoryRepository $categoryRepository,
-                                OverValueRepository $overValueRepository,
-                                BadgeManager $badgeManager,
-                                SessionInterface $session)
+                                OverValueRepository $overValueRepository)
     {
-        $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository);
+        try {
+            $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository);
+        } catch (\Exception $e) {
+            return new JsonResponse($e, 500);
+        }
 
-        $patient = $session->get('patient');
-
-        $data = count($this->getDoctrine()
-            ->getRepository(Data::class)
-            ->findBy(['patient' => $patient->getId()]));
-
-        $badges = $this->getDoctrine()
-            ->getRepository(Badge::class)
-            ->findAll();
-
-        $badge = $badgeManager->addBadge($patient, $data, $badges);
-
-        return new JsonResponse([$responseCode, $badge]);
+        return new JsonResponse($responseCode);
     }
 
     /**
