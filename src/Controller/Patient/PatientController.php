@@ -7,6 +7,7 @@ use App\Entity\Badge;
 use App\Entity\Data;
 use App\Entity\OverValue;
 use App\Entity\Patient;
+use App\Form\ContactType;
 use App\Repository\DataCategoryRepository;
 use App\Repository\DataRepository;
 use App\Repository\OverValueRepository;
@@ -16,6 +17,7 @@ use App\Service\MailingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -98,12 +100,21 @@ class PatientController extends AbstractController
     /**
      * @Route("/parent/{id}", name="parent")
      * @param Patient $patient
+     * @param Request $request
      * @return Response
      */
-    public function parentTable(Patient $patient)
+    public function parentTable(Patient $patient, Request $request)
     {
+        $form = $this->createForm(ContactType::class, $patient);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+        }
+
         return $this->render('patient/parent.html.twig', [
             'patient' => $patient,
+            'contact' => $form->createView()
         ]);
     }
 
