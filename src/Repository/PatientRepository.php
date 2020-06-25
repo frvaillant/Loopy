@@ -40,7 +40,7 @@ class PatientRepository extends ServiceEntityRepository
 
         $patient = $this->find($patientId);
         $data = new Data();
-        $category = $categoryRepository->find([]);
+        $category = $categoryRepository->findOneBy([]);
         $data->setPatient($patient);
         $data->setValue($glycemy);
         $data->setDataCategory($category);
