@@ -18,7 +18,7 @@ use \DateTime;
  */
 class PatientRepository extends ServiceEntityRepository
 {
-    private $mailingService;
+    private MailingService $mailingService;
 
     public function __construct(ManagerRegistry $registry, MailingService $mailingService)
     {
@@ -27,10 +27,10 @@ class PatientRepository extends ServiceEntityRepository
     }
 
     public function saveData($glycemy, EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository) {
-        $patientId = 94;
+        $patientId = 32;
         $patient = $this->findOneById($patientId);
         $data = new Data();
-        $category = $categoryRepository->findOneBy([]);
+        $category = $categoryRepository->findOneById(1);
         $data->setPatient($patient);
         $data->setValue($glycemy);
         $data->setDataCategory($category);
