@@ -2,9 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Doctor;
 use App\Entity\Patient;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;

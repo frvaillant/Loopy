@@ -5,8 +5,6 @@ namespace App\Service;
 
 
 use App\Entity\Award;
-use App\Entity\Badge;
-use App\Entity\Data;
 use App\Entity\Patient;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -28,31 +26,31 @@ class BadgeManager
                 $award->setBadge($badges[0]);
                 $this->em->persist($award);
                 break;
-            case 4:
+            case 6:
                 $award = new Award();
                 $award->setPatient($patient);
                 $award->setBadge($badges[1]);
                 $this->em->persist($award);
                 break;
-            case 24:
+            case 42:
                 $award = new Award();
                 $award->setPatient($patient);
                 $award->setBadge($badges[2]);
                 $this->em->persist($award);
                 break;
-            case 96:
+            case 168:
                 $award = new Award();
                 $award->setPatient($patient);
                 $award->setBadge($badges[4]);
                 $this->em->persist($award);
                 break;
-            case 576:
+            case 1008:
                 $award = new Award();
                 $award->setPatient($patient);
                 $award->setBadge($badges[6]);
                 $this->em->persist($award);
                 break;
-            case 1152:
+            case 2016:
                 $award = new Award();
                 $award->setPatient($patient);
                 $award->setBadge($badges[7]);
