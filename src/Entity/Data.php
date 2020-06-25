@@ -41,6 +41,11 @@ class Data
      */
     private $addedAt;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hasEaten = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,6 +102,18 @@ class Data
         if ($dateTime) {
             $this->addedAt = $dateTime;
         }
+
+        return $this;
+    }
+
+    public function getHasEaten(): ?bool
+    {
+        return $this->hasEaten;
+    }
+
+    public function setHasEaten(bool $hasEaten): self
+    {
+        $this->hasEaten = $hasEaten;
 
         return $this;
     }

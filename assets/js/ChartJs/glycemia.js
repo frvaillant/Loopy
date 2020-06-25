@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         yAxes: [{
                             scaleLabel : {
                                 display: true,
-                                labelString: 'Glycémie'
+                                labelString: 'Glycémie ( mg/dL )'
                             },
                             ticks: {
                                 suggestedMin: 50,
