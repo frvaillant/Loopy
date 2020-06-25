@@ -8,8 +8,44 @@
     }
 }
 
-canvas
-{
-    max-height: 700px;
-    max-width: 850px;
+.bg {
+    &-wcs {
+        background-color: $wcs;
+    }
+
+    &-light-grey {
+        background-color: $lightGrey;
+    }
+
+    &-dark-grey {
+        background-color: $darkGrey;
+    }
+}
+
+canvas {
+    max-height: 800px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+}
+
+.en-tete {
+    height: 80px;
+}
+
+.margin-table {
+    margin-top: 80px;
+    margin-left: 10px;
+}
+
+h5 {
+    margin-bottom: unset;
+}
+
+.overflow {
+    padding-left: unset;
+    max-height: 100vh;
+    overflow-y: scroll;
+    box-shadow: 0px 0px 5px 7px rgba(171,171,171,1);
 }
