@@ -11,6 +11,10 @@ import '@fortawesome/fontawesome-free/js/all';
 // SCSS Compiler
 import '../scss/app.scss';
 
+// Ajax
+import './ajaxValue';
+import './ajaxList';
+
 // jQuery
 const $ = require('jquery');
 
