@@ -9,6 +9,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use \DateTime;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * @method Patient|null find($id, $lockMode = null, $lockVersion = null)
@@ -27,7 +28,9 @@ class PatientRepository extends ServiceEntityRepository
     }
 
     public function saveData($glycemy, EntityManagerInterface $em, DataCategoryRepository $categoryRepository, OverValueRepository $overValueRepository) {
-        $patientId = 32;
+        $session = new Session();
+        $patientId = $session->get('patient');
+
         $patient = $this->findOneById($patientId);
         $data = new Data();
         $category = $categoryRepository->findOneById(1);

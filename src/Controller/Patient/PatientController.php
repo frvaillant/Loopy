@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use \DateTime;
 
@@ -28,6 +29,8 @@ class PatientController extends AbstractController
      */
     public function index($id, PatientRepository $patientRepository)
     {
+        $session=new Session();
+        $session->set('patient', $id);
         $patient = $patientRepository->findOneById($id);
         return $this->render('patient/index.html.twig', [
                 'patient' => $patient
