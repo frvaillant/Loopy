@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ choosenPatient.firstName| capitalize ~ ' ' ~ choosenPatient.surname |upper }}{% endblock %}
+{% block title %} Loopy | {{ choosenPatient.firstName| capitalize ~ ' ' ~ choosenPatient.surname |upper }}{% endblock %}
 
 {% block body %}
     <input type="hidden" id="PatientId" data-id="{{ choosenPatient.id }}">
