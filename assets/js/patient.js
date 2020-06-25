@@ -12,9 +12,9 @@ $(document).ready(function() {
             connect: true,
             direction: 'rtl',
             orientation: 'vertical',
-            step: 10,
+            step: 1,
             range: {
-                'min': 0,
+                'min': 40,
                 'max': 250
             },
         });
