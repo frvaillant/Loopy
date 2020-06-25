@@ -6,7 +6,7 @@
 
     <div class="container-fluid font-oswald ">
         <div class="row">
-            <div class="col-9 mt-5 text-center">
+            <div class="col-9 pt-5 text-center bg-light-grey">
                 <h1>Ajouter un nouveau patient au Programme Loopy</h1>
                 {% for category, messages in app.flashes %}
                     {% for message in messages %}
@@ -20,7 +20,7 @@
                     {{ include('/doctor/patient/_new_form.html.twig') }}
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-3 overflow">
                 {% include '/doctor/components/_patient_list.html.twig' %}
             </div>
         </div>

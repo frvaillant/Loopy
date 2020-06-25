@@ -28,13 +28,13 @@ class PatientType extends AbstractType
                 'label'=>'Date de Naissance',
             ])
             ->add('weight', IntegerType::class, [
-                'label'=> 'Poids'
+                'label'=> 'Poids (kg)'
             ])
             ->add('limitUp', IntegerType::class, [
-                'label'=>'Seuil haut'
+                'label'=>'Seuil haut (mmg/dL)'
             ])
             ->add('limitDown', IntegerType::class, [
-                'label'=>'Seuil bas'
+                'label'=>'Seuil bas (mmg/dL'
             ])
 
         ;
