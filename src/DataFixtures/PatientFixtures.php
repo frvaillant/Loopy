@@ -30,8 +30,8 @@ class PatientFixtures extends Fixture implements DependentFixtureInterface
             $patient->setBirthday(new DateTime($year . '-' . $month . '-' . $day));
             $patient->setWeight(rand(22, 40));
             $patient->setDoctor($this->getReference('doctor'));
-            $patient->setLimitDown(60);
-            $patient->setLimitUp(200);
+            $patient->setLimitDown(rand(50, 70));
+            $patient->setLimitUp(rand(190, 210));
             $manager->persist($patient);
             $this->setReference('patient_' . $i, $patient);
         }
