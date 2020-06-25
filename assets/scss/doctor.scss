@@ -4,7 +4,9 @@
 }
 
 .bck-grey {
-  background: linear-gradient(to bottom right, #b0bbc9, #dcdcdc, #b0bbc9, #dcdcdc);
+  background: white;
+  border: 1px solid black;
+  border-radius: 10px;
   box-shadow: 0 3px 3px grey;
 }
 
@@ -33,4 +35,8 @@
 }
 .list-patient {
   cursor: pointer;
+}
+
+.envoyer {
+  border-radius: 10px;
 }
