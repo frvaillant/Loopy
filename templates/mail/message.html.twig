@@ -5,7 +5,6 @@
         div {
             width: 100%;
             height: 100%;
-            background-color: #579BCC;
             text-align: center;
         }
         p {
@@ -17,10 +16,15 @@
             width: 300px;
             height: 300px;
         }
+        card {
+            margin: 0 auto;
+        }
     </style>
     <div>
         <img src="{{ email.image('@images/logo2.svg') }}" alt="Loopy">
-        <h1>{{ subject }}</h1>
-        <p>{{ content }}</p>
+        <div class="card">
+            <h1>{{ subject }}</h1>
+            <p>{{ content }}</p>
+        </div>
     </div>
 {% endapply %}

@@ -3,103 +3,113 @@
 {% block title %}{{ patient.firstName | capitalize ~ ' ' ~ patient.surname | upper }}{% endblock %}
 
 {% block body %}
-<input type="hidden" id="PatientId" data-id="{{ patient.id }}">
-<div class="container-fluid bg-light-grey min-vh-100">
-    <div class="row">
-        {% for category, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ category }} text-center container mt-5">
-                    {{ message }}
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                </div>
+    <input type="hidden" id="PatientId" data-id="{{ patient.id }}">
+    <div class="container-fluid bg-light-grey min-vh-100">
+        <div class="row">
+            {% for category, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ category }} text-center container mt-5">
+                        {{ message }}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                    </div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-    </div>
-    <div class="row mt-5">
-        <div class="col-6 d-flex flex-column">
-            <div class="m-auto">
-                <h3><span class="show-icon bg-white text-center mr-3 shadow"><i
-                                class="fas fa-user-injured mt-1"></i></span> {{ patient.firstName| capitalize ~ ' ' ~ patient.surname | upper }}
-                </h3>
-                <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i
-                                class="fas fa-birthday-cake mt-1"></i></span> {{ patient.birthday | date ('d/m/Y') }}
-                    - {{ patient.age }} ans</h4>
-                <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i
-                                class="fas fa-weight mt-1"></i></span> Poids {{ patient.weight }} Kg</h4>
+        </div>
+        <div class="row mt-5">
+            <div class="col-6 d-flex flex-column">
+                <div class="m-auto">
+                    <h3><span class="show-icon bg-white text-center mr-3 shadow"><i
+                                    class="fas fa-user-injured mt-1"></i></span> {{ patient.firstName| capitalize ~ ' ' ~ patient.surname | upper }}
+                    </h3>
+                    <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i
+                                    class="fas fa-birthday-cake mt-1"></i></span> {{ patient.birthday | date ('d/m/Y') }}
+                        - {{ patient.age }} ans</h4>
+                    <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i
+                                    class="fas fa-weight mt-1"></i></span> Poids {{ patient.weight }} Kg</h4>
+                </div>
+            </div>
+            <div class="col-6 d-flex flex-column">
+                <div class="m-auto">
+                    <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i
+                                    class="fas fa-virus mt-1"></i></span> Diabète Insulino Dépendant</h4>
+                    <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i
+                                    class="fas fa-stethoscope mt-1"></i></span> {{ patient.doctor.doctorName }}</h4>
+                    <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i
+                                    class="fas fa-phone-square mt-1"></i></span> 06.48.32.72.64</h4>
+                </div>
             </div>
         </div>
-        <div class="col-6 d-flex flex-column">
-            <div class="m-auto">
-                <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i
-                                class="fas fa-virus mt-1"></i></span> Diabète Insulino Dépendant</h4>
-                <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i
-                                class="fas fa-stethoscope mt-1"></i></span> {{ patient.doctor.doctorName }}</h4>
-                <h4 class="font-weight-lighter"><span class="show-icon bg-white text-center mr-3 shadow"><i
-                                class="fas fa-phone-square mt-1"></i></span> 06.48.32.72.64</h4>
+
+        <hr class="mt-5">
+
+        <div class="d-flex justify-content-center">
+            <a class="d-flex flex-column align-items-center text-blue" id="toggle1" data-toggle="collapse"
+               href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" title="Cliquer pour afficher">
+                <p class="mb-0">Modifier vos coordonnées personnelles</p>
+                <p class="mb-0 mt-neg" id="i1"><i class="fas fa-caret-down"></i></p>
+            </a>
+        </div>
+        <div class="collapse" id="collapseExample">
+            {{ form_start(contact) }}
+            <div class="container bck-grey p-3 mb-3 w-25">
+                {{ form_label(contact.email) }}
+                {{ form_widget(contact.email) }}
             </div>
-        </div>
-    </div>
-
-    <hr class="mt-5">
-
-    <p class="text-center">
-        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-           aria-controls="collapseExample" class="text-blue" title="Cliquer pour afficher">Modifier vos coordonnées personnelles</a>
-    </p>
-    <div class="collapse" id="collapseExample">
-        {{ form_start(contact) }}
-        <div class="container bck-grey p-3 mb-3 w-25">
-            {{ form_label(contact.email) }}
-            {{ form_widget(contact.email) }}
-        </div>
-        <div class="d-flex justify-content-around container">
-            <div class="card parent-card bck-grey" style="width: 30rem;">
-                <div class="card-body">
-                    <h2 class="card-subtitle mb-2 text-muted text-center">Père</h2>
-                    <div class="d-flex">
-                        <div class="col-5">
-                            {{ form_label(contact.dadSurname) }}
-                            {{ form_label(contact.dadFirstName) }}
-                            {{ form_label(contact.dadPhoneNumber) }}
-                        </div>
-                        <div class="col_5 offset_2">
-                            {{ form_widget(contact.dadSurname) }}
-                            {{ form_widget(contact.dadFirstName) }}
-                            {{ form_widget(contact.dadPhoneNumber) }}
+            <div class="d-flex justify-content-around container">
+                <div class="card parent-card bck-grey" style="width: 30rem;">
+                    <div class="card-body">
+                        <h2 class="card-subtitle mb-2 text-muted text-center">Père</h2>
+                        <div class="d-flex">
+                            <div class="col-5">
+                                {{ form_label(contact.dadSurname) }}
+                                {{ form_label(contact.dadFirstName) }}
+                                {{ form_label(contact.dadPhoneNumber) }}
+                            </div>
+                            <div class="col_5 offset_2">
+                                {{ form_widget(contact.dadSurname) }}
+                                {{ form_widget(contact.dadFirstName) }}
+                                {{ form_widget(contact.dadPhoneNumber) }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card parent-card bck-grey" style="width: 30rem;">
-                <div class="card-body">
-                    <h2 class="card-subtitle mb-2 text-muted text-center">Mère</h2>
-                    <div class="d-flex">
-                        <div class="col-5">
-                            {{ form_label(contact.momSurname) }}
-                            {{ form_label(contact.momFirstName) }}
-                            {{ form_label(contact.momPhoneNumber) }}
-                        </div>
-                        <div class="col_5 offset_2">
-                            {{ form_widget(contact.momSurname) }}
-                            {{ form_widget(contact.momFirstName) }}
-                            {{ form_widget(contact.momPhoneNumber) }}
+                <div class="card parent-card bck-grey" style="width: 30rem;">
+                    <div class="card-body">
+                        <h2 class="card-subtitle mb-2 text-muted text-center">Mère</h2>
+                        <div class="d-flex">
+                            <div class="col-5">
+                                {{ form_label(contact.momSurname) }}
+                                {{ form_label(contact.momFirstName) }}
+                                {{ form_label(contact.momPhoneNumber) }}
+                            </div>
+                            <div class="col_5 offset_2">
+                                {{ form_widget(contact.momSurname) }}
+                                {{ form_widget(contact.momFirstName) }}
+                                {{ form_widget(contact.momPhoneNumber) }}
+                            </div>
                         </div>
                     </div>
                 </div>
+                <button class="btn btn-primary envoyer" title="Cliquez pour envoyer">Envoyer !</button>
             </div>
-        <button class="btn btn-primary envoyer" title="Cliquez pour envoyer">Envoyer !</button>
+
+            {{ form_end(contact) }}
         </div>
-        {{ form_end(contact) }}
-    </div>
 
-    <hr>
+        <hr>
 
-    <div class="canvas pb-2">
-        <canvas id="glycemia"></canvas>
+        <div class="canvas pb-2">
+            <canvas id="glycemia"></canvas>
+        </div>
     </div>
-    {% endblock %}
+{% endblock %}
 
     {% block javascript %}
     {{ encore_entry_script_tags('glycemia') }}
+    <script>
+        document.getElementById('toggle1').addEventListener('click', (e) => {
+        document.getElementById('i1').classList.toggle('rotator')
+    })
+    </script>
     {% endblock %}

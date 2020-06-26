@@ -36,10 +36,21 @@
 
                 {% if choosenPatient.dadSurname or choosenPatient.momSurname %}
                     <hr>
-                    <p class="text-center">
-                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                           aria-controls="collapseExample" class="text-blue" title="Cliquer pour afficher">Parents</a>
-                    </p>
+
+                    <div class="d-flex justify-content-center">
+                        <a class="d-flex flex-column align-items-center text-blue" id="toggle1" data-toggle="collapse"
+                           href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" title="Cliquer pour afficher">
+                            <p class="mb-0">Parents</p>
+                            <p class="mb-0 mt-neg" id="i1"><i class="fas fa-caret-down"></i></p>
+                        </a>
+                        <a class="d-flex flex-column align-items-center ml-5 text-blue" id="toggle2"
+                           data-toggle="collapse"
+                           href="#collapseEmail" role="button" aria-expanded="false" title="Cliquer pour afficher" aria-controls="collapseExample">
+                            <p class="mb-0">Envoyer un email</p>
+                            <p class="mb-0 mt-neg" id="i2"><i class="fas fa-caret-down"></i></p>
+                        </a>
+                    </div>
+
                     <div class="collapse" id="collapseExample">
                         {% if choosenPatient.dadSurname %}
                         <div class="d-flex justify-content-around container">
@@ -56,37 +67,37 @@
                                     <div class="card-body">
                                         <h3 class="card-subtitle mb-2 text-muted">Mère</h3>
                                         <h5 class="card-title">{{ choosenPatient.momFullName }}</h5>
-                                        <p class="card-text">Téléphone : {{ choosenPatient.momFormattedPhoneNumber }}</p>
+                                        <p class="card-text">Téléphone
+                                            : {{ choosenPatient.momFormattedPhoneNumber }}</p>
                                     </div>
                                 </div>
                             {% endif %}
                         </div>
                     </div>
                 {% endif %}
-                <hr>
 
-                <p class="text-center">
-                    <a data-toggle="collapse" href="#collapseEmail" role="button" aria-expanded="false"
-                       aria-controls="collapseExample" class="text-blue" title="Cliquer pour afficher">Envoyer un email</a>
-                </p>
                 <div class="collapse" id="collapseEmail">
-                    <form action="{{ path('doctor_email') }}" method="post" enctype="multipart/form-data">
-                        <div>
-                            <label for="subject">Objet</label>
-                            <input type="text" id="subject" name="subject">
-                        </div>
-                        <div>
-                            <label for="content">Contenu</label>
-                            <textarea name="content" id="content" cols="30" rows="10"></textarea>
-                        </div>
-                        <div>
-                            <label for="files">Pièce jointe</label>
-                            <input type="file" name="files" id="files">
-                        </div>
-                        <button type="submit">Envoyer</button>
-                    </form>
+                    <div class="d-flex justify-content-center">
+                        <form action="{{ path('doctor_email') }}" method="post" enctype="multipart/form-data">
+                            <div>
+                                <label for="subject"></label>
+                                <input type="text" id="subject" name="subject" class="w-100 pl-1 rounded"
+                                       placeholder="Objet">
+                            </div>
+                            <div>
+                                <label for="content"></label>
+                                <textarea name="content" id="content" cols="30" rows="10" class="w-100 p-1 rounded"
+                                          placeholder="Votre mail..."></textarea>
+                            </div>
+                            <div class="mt-2">
+                                <label for="files">Pièce jointe :</label>
+                                <input type="file" name="files" id="files">
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-2 text-center float-right">Envoyer <i
+                                        class="fas fa-check"></i></button>
+                        </form>
+                    </div>
                 </div>
-
                 <hr>
 
                 <h2 class="text-center mt-5">Glycémie sur une semaine</h2>
@@ -105,4 +116,12 @@
 {% block javascript %}
 {{ encore_entry_script_tags('glycemia') }}
 {{ encore_entry_script_tags('ajaxValue') }}
+<script>
+    document.getElementById('toggle1').addEventListener('click', (e) => {
+        document.getElementById('i1').classList.toggle('rotator')
+    })
+    document.getElementById('toggle2').addEventListener('click', (e) => {
+        document.getElementById('i2').classList.toggle('rotator')
+    })
+</script>
 {% endblock %}

@@ -23,10 +23,10 @@
         }
     </style>
     <div>
+        <img src="{{ email.image('@images/logo2.svg') }}" alt="Loopy">
         <br>
             <h2>Loopy vous informe qu'il ne se sent pas très bien</h2>
         <br>
-            <img src="{{ email.image('@images/loopy2.svg') }}" alt="Loopy">
         <br>
             <p>Le taux de {{ patient.firstname }} est {{ context == 'up' ? 'au dessus' : 'en dessous' }} de la limite.</p>
             <p>Si le taux ne se stabilise pas veuillez prendre rendez vous avec {{ patient.doctor.surname }}</p>

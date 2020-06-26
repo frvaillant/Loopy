@@ -12,7 +12,27 @@
                     Bonjour {{patient.firstname}}
                 </div>
 
-                    <a href="/parent/{{ patient.id }}" class="btn btn-dark btn-for-parents">Parents</a>
+                    <a href="" class="btn btn-dark btn-for-parents" data-toggle="modal" data-target="#exampleModal">Parents</a>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content w-75 ml-auto mr-auto">
+                            <div class="modal-header border-bottom-0">
+                                <h5 class="modal-title" id="exampleModalLabel">Entrez votre code parental.</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex flex-column">
+                                    <input type="password" class="text-center w-75 ml-auto mr-auto rounded pt-2 pb-2">
+                                    <button class="btn btn-dark btn-for-parents mt-3 w-75 ml-auto mr-auto font-neucha">Se connecter !</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <div class="carousel-item loopyblue" data-interval="">
