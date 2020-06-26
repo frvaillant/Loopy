@@ -38,12 +38,13 @@
                     <hr>
                     <div class="d-flex justify-content-center">
                         <a class="d-flex flex-column align-items-center text-blue" id="toggle1" data-toggle="collapse"
-                             href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                           href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <p class="mb-0">Parents</p>
                             <p class="mb-0 mt-neg" id="i1"><i class="fas fa-caret-down"></i></p>
                         </a>
-                        <a class="d-flex flex-column align-items-center ml-5 text-blue" id="toggle2" data-toggle="collapse"
-                             href="#collapseEmail" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <a class="d-flex flex-column align-items-center ml-5 text-blue" id="toggle2"
+                           data-toggle="collapse"
+                           href="#collapseEmail" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <p class="mb-0">Envoyer un email</p>
                             <p class="mb-0 mt-neg" id="i2"><i class="fas fa-caret-down"></i></p>
                         </a>
@@ -65,7 +66,8 @@
                                     <div class="card-body">
                                         <h3 class="card-subtitle mb-2 text-muted">Mère</h3>
                                         <h5 class="card-title">{{ choosenPatient.momFullName }}</h5>
-                                        <p class="card-text">Téléphone : {{ choosenPatient.momFormattedPhoneNumber }}</p>
+                                        <p class="card-text">Téléphone
+                                            : {{ choosenPatient.momFormattedPhoneNumber }}</p>
                                     </div>
                                 </div>
                             {% endif %}
@@ -77,17 +79,20 @@
                         <form action="{{ path('doctor_email') }}" method="post" enctype="multipart/form-data">
                             <div>
                                 <label for="subject"></label>
-                                <input type="text" id="subject" name="subject" class="w-100 pl-1 rounded" placeholder="Objet">
+                                <input type="text" id="subject" name="subject" class="w-100 pl-1 rounded"
+                                       placeholder="Objet">
                             </div>
                             <div>
                                 <label for="content"></label>
-                                <textarea name="content" id="content" cols="30" rows="10" class="w-100 p-1 rounded" placeholder="Votre mail..."></textarea>
+                                <textarea name="content" id="content" cols="30" rows="10" class="w-100 p-1 rounded"
+                                          placeholder="Votre mail..."></textarea>
                             </div>
                             <div class="mt-2">
                                 <label for="files">Pièce jointe :</label>
                                 <input type="file" name="files" id="files">
                             </div>
-                            <button type="submit" class="btn btn-primary mt-2 text-center float-right">Envoyer <i class="fas fa-check"></i></button>
+                            <button type="submit" class="btn btn-primary mt-2 text-center float-right">Envoyer <i
+                                        class="fas fa-check"></i></button>
                         </form>
                     </div>
                 </div>
