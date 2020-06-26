@@ -89,7 +89,7 @@ class DoctorController extends AbstractController
         $beforeEat = $dataRepository->findBy(['patient' => $patient, 'hasEaten' => false], ['addedAt' => 'DESC'], self::NUMBER_OF_DATA);
         $beforeEat = $dataManager->prepareDataForGraphic($beforeEat);
 
-        $afterEat = $dataRepository->findBy(['patient' => $patient, 'hasEaten' => true], ['addedAt' => 'DESC'], self::NUMBER_OF_DATA, self::NUMBER_OF_DATA);
+        $afterEat = $dataRepository->findBy(['patient' => $patient, 'hasEaten' => true], ['addedAt' => 'DESC'], self::NUMBER_OF_DATA);
         $afterEat = $dataManager->prepareDataForGraphic($afterEat);
 
         $threshold['min'] = $patient->getLimitDown();
