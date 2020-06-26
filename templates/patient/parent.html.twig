@@ -106,6 +106,7 @@
 
     {% block javascript %}
     {{ encore_entry_script_tags('glycemia') }}
+    {{ encore_entry_script_tags('ajaxNotification') }}
     <script>
         document.getElementById('toggle1').addEventListener('click', (e) => {
         document.getElementById('i1').classList.toggle('rotator')

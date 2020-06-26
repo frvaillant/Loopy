@@ -114,6 +114,11 @@ class Patient
      */
     private $momPhoneNumber;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Notification::class, mappedBy="patient", cascade={"persist", "remove"})
+     */
+    private $notification;
+
     public function __construct()
     {
         $this->awards = new ArrayCollection();
@@ -425,6 +430,23 @@ class Patient
     public function setMomPhoneNumber(?string $momPhoneNumber): self
     {
         $this->momPhoneNumber = $momPhoneNumber;
+
+        return $this;
+    }
+
+    public function getNotification(): ?Notification
+    {
+        return $this->notification;
+    }
+
+    public function setNotification(Notification $notification): self
+    {
+        $this->notification = $notification;
+
+        // set the owning side of the relation if necessary
+        if ($notification->getPatient() !== $this) {
+            $notification->setPatient($this);
+        }
 
         return $this;
     }

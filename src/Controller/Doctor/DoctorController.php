@@ -2,6 +2,7 @@
 
 namespace App\Controller\Doctor;
 
+use App\Entity\Notification;
 use App\Entity\Patient;
 use App\Form\PatientLimitType;
 use App\Form\PatientType;
@@ -104,27 +105,38 @@ class DoctorController extends AbstractController
     /**
      * @Route("/doctor/email/send", name="doctor_email")
      * @param Request $request
+     * @param MailingService $mailingService
+     * @param PatientRepository $patientRepository
      */
-    public function doctorSendMail(Request $request, MailingService $mailingService)
+    public function doctorSendMail(Request $request, MailingService $mailingService, PatientRepository $patientRepository)
     {
-        dump($request->request->all());
-        dump($request->files->get('files'));
         if ($request->request->has('subject')) {
             if ($request->files->has('files')) {
                 $brochureFile = $request->files->get('files');
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = str_replace(' ', '', $originalFilename);
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
-                // Move the file to the directory where brochures are stored
+                $notification = new Notification();
+                $patient = $patientRepository->findOneBy(['id' => $request->request->get('id')]);
+                $notification->setHasNotification(true);
+                $notification->setPatient($patient);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($notification);
+                $entityManager->flush();
+
                 try {
                     $brochureFile->move(
                         $this->getParameter('files_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                    $this->addFlash('danger', 'Erreur interne');
                 }
+                $this->addFlash('success', 'Votre email à était envoyer avec succès');
+
                 $mailingService->emailToParents($request->request, $newFilename);
+
+                return $this->redirectToRoute('doctor_patient', ['id' => $request->request->get('id')]);
             }
         }
     }
