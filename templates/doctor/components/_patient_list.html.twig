@@ -1,15 +1,13 @@
 <div class="w-100 position-fixed bg-dark-grey pl-3 en-tete">
     <div class="d-flex align-items-center mt-3">
-        <a class="navbar-brand text-white" href="{{ path('doctor') }}" title="Ajouter un patient à Loopy"><i class="fas fa-user-plus"></i></a>
-        <h5 class="ml-4 text-white mr-4">Prénom  Nom  </h5>
-        <a class="text-white ml-5" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            <i class="fas fa-search text-white "></i>
+        <a class="navbar-brand text-white mr-4" href="{{ path('doctor') }}" title="Ajouter un patient à Loopy"><i class="fas fa-user-plus"></i></a>
+        <h5 class="text-white ml-3 ">Patients </h5>
+        <a class="text-white searchicon" data-toggle="collapse" title="Rechercher un patient" href="#collapseExamplelist" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <i class="fab fa-searchengin text-white fa-2x"></i>
         </a>
     </div>
-    <div class="collapse" id="collapseExample">
-            <input type="text" class="card card-body" placeholder="Entrez votre recheche">
-
-
+    <div class="collapse searchdiv text-white" id="collapseExamplelist" >
+            <input type="text" class="card card-body searchfield text-white" placeholder="Entrez votre recherche" >
     </div>
 
 </div>

@@ -40,3 +40,21 @@
 .envoyer {
   border-radius: 10px;
 }
+
+.searchfield{
+  background-color: $loopy-blue;
+  width: 100%;
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+}
+.searchicon{
+  margin-left: 160px;
+}
+.searchdiv{
+  width: 270px;
+  position: fixed;
+  top: 6px;
+  margin-left:-10px;
+}
