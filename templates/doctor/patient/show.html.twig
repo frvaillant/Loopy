@@ -36,12 +36,19 @@
 
                 {% if choosenPatient.dadSurname or choosenPatient.momSurname %}
                     <hr>
-                    <p class="text-center">
-                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-                           aria-controls="collapseExample" class="text-blue">Parents</a>
-                        <a data-toggle="collapse" href="#collapseEmail" role="button" aria-expanded="false"
-                           aria-controls="collapseExample" class="text-blue ml-5">Envoyer un email</a>
-                    </p>
+                    <div class="d-flex justify-content-center">
+                        <a class="d-flex flex-column align-items-center text-blue" id="toggle1" data-toggle="collapse"
+                             href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <p class="mb-0">Parents</p>
+                            <p class="mb-0 mt-neg" id="i1"><i class="fas fa-caret-down"></i></p>
+                        </a>
+                        <a class="d-flex flex-column align-items-center ml-5 text-blue" id="toggle2" data-toggle="collapse"
+                             href="#collapseEmail" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <p class="mb-0">Envoyer un email</p>
+                            <p class="mb-0 mt-neg" id="i2"><i class="fas fa-caret-down"></i></p>
+                        </a>
+                    </div>
+
                     <div class="collapse" id="collapseExample">
                         {% if choosenPatient.dadSurname %}
                         <div class="d-flex justify-content-around container">
@@ -65,8 +72,6 @@
                         </div>
                     </div>
                 {% endif %}
-                <hr>
-
                 <div class="collapse" id="collapseEmail">
                     <div class="d-flex justify-content-center">
                         <form action="{{ path('doctor_email') }}" method="post" enctype="multipart/form-data">
@@ -82,10 +87,11 @@
                                 <label for="files">Pièce jointe :</label>
                                 <input type="file" name="files" id="files">
                             </div>
-                            <button type="submit" class="btn btn-primary mt-2 text-center">Envoyer <i class="fas fa-check"></i></button>
+                            <button type="submit" class="btn btn-primary mt-2 text-center float-right">Envoyer <i class="fas fa-check"></i></button>
                         </form>
                     </div>
                 </div>
+                <hr>
 
                 <h2 class="text-center mt-5">Glycémie sur une semaine</h2>
                 <div class="canvas">
@@ -103,4 +109,12 @@
 {% block javascript %}
 {{ encore_entry_script_tags('glycemia') }}
 {{ encore_entry_script_tags('ajaxValue') }}
+<script>
+    document.getElementById('toggle1').addEventListener('click', (e) => {
+        document.getElementById('i1').classList.toggle('rotator')
+    })
+    document.getElementById('toggle2').addEventListener('click', (e) => {
+        document.getElementById('i2').classList.toggle('rotator')
+    })
+</script>
 {% endblock %}
