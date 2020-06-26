@@ -15,17 +15,17 @@ class PatientLimitType extends AbstractType
         $builder
             ->add('weight', IntegerType::class, [
                 'label'=> 'Poids (kg)',
-                'attr' => ['class' => 'col-5'],
+                'attr' => ['class' => 'col-5', 'title'=> 'ex : 25'],
                 'label_attr' => ['class' => 'col-6']
             ])
             ->add('limitUp', IntegerType::class, [
                 'label'=>'Seuil haut (mg/dL)',
-                'attr' => ['class' => 'col-5'],
+                'attr' => ['class' => 'col-5', 'title'=> 'ex : 180'],
                 'label_attr' => ['class' => 'col-6']
             ])
             ->add('limitDown', IntegerType::class, [
                 'label'=>'Seuil bas (mg/dL)',
-                'attr' => ['class' => 'col-5'],
+                'attr' => ['class' => 'col-5', 'title'=> 'ex : 180'],
                 'label_attr' => ['class' => 'col-6']
 
             ])

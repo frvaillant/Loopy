@@ -36,15 +36,16 @@
 
                 {% if choosenPatient.dadSurname or choosenPatient.momSurname %}
                     <hr>
+
                     <div class="d-flex justify-content-center">
                         <a class="d-flex flex-column align-items-center text-blue" id="toggle1" data-toggle="collapse"
-                           href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                           href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" title="Cliquer pour afficher">
                             <p class="mb-0">Parents</p>
                             <p class="mb-0 mt-neg" id="i1"><i class="fas fa-caret-down"></i></p>
                         </a>
                         <a class="d-flex flex-column align-items-center ml-5 text-blue" id="toggle2"
                            data-toggle="collapse"
-                           href="#collapseEmail" role="button" aria-expanded="false" aria-controls="collapseExample">
+                           href="#collapseEmail" role="button" aria-expanded="false" title="Cliquer pour afficher" aria-controls="collapseExample">
                             <p class="mb-0">Envoyer un email</p>
                             <p class="mb-0 mt-neg" id="i2"><i class="fas fa-caret-down"></i></p>
                         </a>
@@ -74,6 +75,7 @@
                         </div>
                     </div>
                 {% endif %}
+
                 <div class="collapse" id="collapseEmail">
                     <div class="d-flex justify-content-center">
                         <form action="{{ path('doctor_email') }}" method="post" enctype="multipart/form-data">
