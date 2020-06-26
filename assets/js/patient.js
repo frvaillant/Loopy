@@ -35,16 +35,18 @@ $(document).ready(function() {
         glycemytext.html('100');
 
         const sender = document.getElementById('send-button-svg');
+
+        // BOUTON NON
         $('#send-button-svg').mousedown(function () {
             $('#btn-up').css('display', 'none');
             $('#btn-down').css('display', 'block');
         }).mouseup(function () {
             $('#btn-up').css('display', 'block');
-            $('#bbtn-down').css('display', 'none');
+            $('#btn-down').css('display', 'none');
             $('#btn-up').addClass('rotate');
             const value = parseInt(glycemytext.html());
 
-            fetch('/patient/measure/' + value, {
+            fetch('/patient/measure/' + value + '/haseaten/0', {
                 method: "put"
             })
                 .then(response => {
@@ -58,7 +60,10 @@ $(document).ready(function() {
                            })
                        $('#doc-calque-3').css('display', 'block');
                        $('#btn-up').removeClass('rotate');
-                       $('#send-button-svg').addClass('d-none');
+                       $('#send-button').addClass('d-none');
+                       $('#success').removeClass('d-none');
+                       $('#assiette').addClass('d-none');
+                       $('#merci').css('display', 'block');
                        $('#glycemy-value').hide();
                        $('#ardoise').hide();
                        $('#success').removeClass('d-none');
@@ -67,6 +72,49 @@ $(document).ready(function() {
                    }
             });
         })
+
+    // BOUTON VERT
+    $('#btn-send-yes').mousedown(function () {
+        $('#btn-ok-up').css('display', 'none');
+        $('#btn-ok-down').css('display', 'block');
+    }).mouseup(function () {
+        $('#btn-ok-up').css('display', 'block');
+        $('#btn-ok-down').css('display', 'none');
+        $('#btn-ok-up').addClass('rotate');
+        const value = parseInt(glycemytext.html());
+
+        fetch('/patient/measure/' + value + '/haseaten/1', {
+            method: "put"
+        })
+            .then(response => {
+                return response.json()
+            }).then(data => {
+            if (data.response === 201) {
+                fetch('/check/badge')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data, 'badge')
+                    })
+                $('#doc-calque-3').css('display', 'block');
+                $('#btn-ok-up').removeClass('rotate');
+                $('#send-button').addClass('d-none');
+                $('#success').removeClass('d-none');
+                $('#assiette').addClass('d-none');
+                $('#merci').css('display', 'block');
+                $('#glycemy-value').hide();
+                $('#ardoise').hide();
+                $('#success').removeClass('d-none');
+                $('#' + data.state).removeClass('d-none');
+                document.getElementById('slider').classList.add('d-none');
+            }
+        });
+    })
+
+
+
+
+
+
     const chapos = document.getElementsByClassName('chapo');
     for (let i=0; i<chapos.length; i++) {
         chapos[i].addEventListener('click', (e) => {
