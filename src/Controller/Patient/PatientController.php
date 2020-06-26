@@ -10,12 +10,13 @@ use App\Entity\Patient;
 use App\Form\ContactType;
 use App\Repository\DataCategoryRepository;
 use App\Repository\DataRepository;
+use App\Repository\NotificationRepository;
 use App\Repository\OverValueRepository;
 use App\Repository\PatientRepository;
 use App\Service\BadgeManager;
 use App\Service\MailingService;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -124,6 +125,44 @@ class PatientController extends AbstractController
             $this->getDoctrine()->getManager()->remove($value);
         }
         $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse();
+    }
+
+    /**
+     * @param SessionInterface $session
+     * @param NotificationRepository $notificationRepository
+     * @Route("/patient/hasNotification", name="has_notification")
+     * @return JsonResponse
+     */
+    public function checkHasNotification(SessionInterface $session, NotificationRepository $notificationRepository)
+    {
+        $notification = $notificationRepository->findBy([
+            'patient' => $session->get('patient')->getId(),
+        ]);
+        $result = false;
+        if (count($notification) > 0) {
+            $result = true;
+        }
+        return new JsonResponse($result);
+    }
+
+    /**
+     * @param SessionInterface $session
+     * @param NotificationRepository $notificationRepository
+     * @param EntityManagerInterface $em
+     * @return JsonResponse
+     * @Route("/patient/hasNotification/delete", name="delete_notification")
+     */
+    public function deleteNotification(SessionInterface $session,
+                                       NotificationRepository $notificationRepository,
+                                       EntityManagerInterface $em)
+    {
+        $notifications = $notificationRepository->findBy(['patient' => $session->get('patient')->getId()]);
+        foreach ($notifications as $notification) {
+            $em->remove($notification);
+        }
+        $em->flush();
 
         return new JsonResponse();
     }
