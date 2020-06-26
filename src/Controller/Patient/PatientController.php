@@ -61,7 +61,7 @@ class PatientController extends AbstractController
     }
 
     /**
-     * @Route("/patient/measure/{glycemy}", name="send_value", methods={"PUT"})
+     * @Route("/patient/measure/{glycemy}/haseaten/{haseaten}", name="send_value", methods={"PUT"})
      * @param $glycemy
      * @param PatientRepository $patientRepository
      * @param EntityManagerInterface $em
@@ -70,6 +70,7 @@ class PatientController extends AbstractController
      * @return JsonResponse
      */
     public function sendMeasure($glycemy,
+                                $haseaten,
                                 PatientRepository $patientRepository,
                                 EntityManagerInterface $em,
                                 DataCategoryRepository $categoryRepository,
@@ -78,7 +79,7 @@ class PatientController extends AbstractController
     {
 
         try {
-            $responseCode = $patientRepository->saveData($glycemy, $em, $categoryRepository, $overValueRepository, $session);
+            $responseCode = $patientRepository->saveData($glycemy, $haseaten, $em, $categoryRepository, $overValueRepository, $session);
         } catch (\Exception $e) {
             return new JsonResponse($e, 500);
         }

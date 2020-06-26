@@ -32,6 +32,7 @@ class PatientRepository extends ServiceEntityRepository
 
     public function saveData(
         $glycemy,
+        $haseaten,
         EntityManagerInterface $em,
         DataCategoryRepository $categoryRepository,
         OverValueRepository $overValueRepository,
@@ -43,6 +44,7 @@ class PatientRepository extends ServiceEntityRepository
         $category = $categoryRepository->findOneBy([]);
         $data->setPatient($patient);
         $data->setValue($glycemy);
+        $data->setHasEaten($haseaten);
         $data->setDataCategory($category);
         $data->setAddedAt(new DateTime());
         $em->persist($data);
