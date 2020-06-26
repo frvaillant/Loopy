@@ -23,12 +23,17 @@ class PatientFixtures extends Fixture implements DependentFixtureInterface
             $day   = rand(1, 29);
             $month = rand(1, 12);
             $year  = rand(2008, 2014);
+            $age = 2020 - $year;
+            $weight = rand(15, 25);
+            if ($age >= 12) {
+                $weight = rand(20, 35);
+            }
             $patient = new Patient();
             $patient->setFirstName($firstName)
                 ->setSurname($lastName)
                 ->setEmail($email)
                 ->setBirthday(new DateTime($year . '-' . $month . '-' . $day))
-                ->setWeight(rand(22, 40))
+                ->setWeight($weight)
                 ->setDoctor($this->getReference('doctor'))
                 ->setLimitDown(rand(50, 70))
                 ->setLimitUp(rand(190, 210))
