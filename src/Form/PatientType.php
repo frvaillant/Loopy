@@ -19,30 +19,32 @@ class PatientType extends AbstractType
         $builder
             ->add('surname', TextType::class, [
                 'label' => false,
-                'attr'  => ['placeholder' => 'Nom']
+                'attr'  => ['placeholder' => 'Nom', 'title'=> 'Ajoutez un nom']
             ])
             ->add('firstName', TextType::class, [
                 'label' => false,
-                'attr'  => ['placeholder' => 'Prénom']
+                'attr'  => ['placeholder' => 'Prénom', 'title'=> 'Ajoutez un prénom']
             ])
             ->add('birthday', BirthdayType::class, [
                 'label' => false,
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'attr'=>['title'=>'ex : 02/12/2019']
             ])
             ->add('weight', IntegerType::class, [
                 'label' => false,
-                'attr'  => ['placeholder' => 'Poids (kg)']
+                'attr'  => ['placeholder' => 'Poids (kg)', 'title'=> 'ex : 20']
             ])
             ->add('limitUp', IntegerType::class, [
                 'label' => false,
-                'attr'  => ['placeholder' => 'Seuil haut (mg/dL)']
+                'attr'  => ['placeholder' => 'Seuil haut (mg/dL)', 'title'=> 'ex : 180']
             ])
             ->add('limitDown', IntegerType::class, [
                 'label' => false,
-                'attr'  => ['placeholder' => 'Seuil bas (mg/dL)']
+                'attr'  => ['placeholder' => 'Seuil bas (mg/dL)', 'title'=> 'ex : 60']
             ])
             ->add('email', TextType::class, [
-                'label' => false
+                'label' => false,
+                'attr'=>['title'=>'votrepatient@exemple.com']
             ]);
     }
 
