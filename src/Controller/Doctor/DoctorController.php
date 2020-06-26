@@ -132,7 +132,7 @@ class DoctorController extends AbstractController
                 } catch (FileException $e) {
                     $this->addFlash('danger', 'Erreur interne');
                 }
-                $this->addFlash('success', 'Votre email à était envoyer avec succès');
+                $this->addFlash('success', 'Votre email a été envoyé avec succès');
 
                 $mailingService->emailToParents($request->request, $newFilename);
 

@@ -38,8 +38,9 @@ class PatientController extends AbstractController
     public function index(Patient $patient, SessionInterface $session)
     {
         $session->set('patient', $patient);
+
         return $this->render('patient/index.html.twig', [
-                'patient' => $patient
+                'patient' => $patient,
         ]);
     }
 
