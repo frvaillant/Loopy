@@ -3,8 +3,7 @@ function checkNotification() {
         .then(response => response.json())
         .then(data => {
             if (data) {
-                if (window.confirm('Votre docteur vous à envoyer un email !')) {
-                    console.log('toto');
+                if (window.confirm('Votre docteur vous a envoyé un email !')) {
                     fetch('/patient/hasNotification/delete').then(response => response.json())
                         .then(data => {
                             console.log('ok')
